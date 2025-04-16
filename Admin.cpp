@@ -9,26 +9,26 @@
 #include "Admin.h"
 using namespace std;
 
-Admin ::Admin()
+Admin::Admin()
 {
     adminsCount++;
     generateID();
 }
 
-Admin ::Admin(const string &name, const string &type, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, type, email, pass, phoneNum, address)
+Admin::Admin(const string &name, const string &type, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, type, email, pass, phoneNum, address)
 {
     adminsCount++;
     generateID();
 }
 
-void Admin ::generateID()
+void Admin::generateID()
 {
     stringstream ss;
     ss << "UA-" << setw(4) << setfill('0') << adminsCount;
     userID = ss.str();
 }
 
-void Admin ::editDetails()
+void Admin::editDetails()
 {
     system("cls");
     string newName, newEmail, newPass, newPhone, newAddress;
@@ -84,22 +84,22 @@ void Admin ::editDetails()
     _getch();
 }
 
-void Admin ::addVehicleToInventory()
+void Admin::addVehicleToInventory()
 {
     // Implementation to be done once Vehicle and its derived classes are made
 }
 
-void Admin ::removeVehicleFromInventory()
+void Admin::removeVehicleFromInventory()
 {
     // Implementation to be done once Vehicle and its derived classes are made
 }
 
-void Admin ::viewAllVehicles()
+void Admin::viewAllVehicles()
 {
     // Implementation to be done once Vehicle and its derived classes are made
 }
 
-void Admin ::userConsole()
+void Admin::userConsole()
 { // Parameter needed
     string options[5] = {
         "Edit Admin Details and Information.",
@@ -163,4 +163,4 @@ void Admin ::userConsole()
     } while (!exitStatus);
 }
 
-int Admin ::adminsCount = 0;
+int Admin::adminsCount = 0;
