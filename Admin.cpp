@@ -12,16 +12,18 @@ using namespace std;
 Admin::Admin()
 {
     adminsCount++;
-    generateID();
+    generateUserID();
 }
 
 Admin::Admin(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address)
 {
     adminsCount++;
-    generateID();
+    generateUserID();
 }
 
-void Admin::generateID()
+int Admin::getAdminsCount() { return adminsCount; }
+
+void Admin::generateUserID()
 {
     stringstream ss;
     ss << "UA-" << setw(4) << setfill('0') << adminsCount;

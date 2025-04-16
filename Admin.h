@@ -20,7 +20,8 @@ public:
     Admin();
     Admin(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
 
-    void generateID() override;
+    static int getAdminsCount();
+    void generateUserID() override;
     void addVehicleToInventory();      // vector of vehicles in parameter
     void removeVehicleFromInventory(); // vector of vehicles in parameter
     void viewAllVehicles();            // vector of vehicles in parameter

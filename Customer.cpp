@@ -12,16 +12,18 @@ using namespace std;
 Customer::Customer()
 {
     customersCount++;
-    generateID();
+    generateUserID();
 }
 
 Customer::Customer(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address)
 {
     customersCount++;
-    generateID();
+    generateUserID();
 }
 
-void Customer::generateID()
+int Customer::getCustomersCount() { return customersCount; }
+
+void Customer::generateUserID()
 {
     stringstream ss;
     ss << "UC-" << setw(4) << setfill('0') << customersCount;

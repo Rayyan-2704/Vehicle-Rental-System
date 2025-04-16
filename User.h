@@ -29,7 +29,7 @@ public:
     virtual void registerUser();
     virtual void updateUserProfile(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
     bool verifyLogin(const string &e, const string &p);
-    virtual void generateID();
+    virtual void generateUserID();
     virtual void displayUserInfo() const;
     virtual void editDetails() = 0;
     virtual void userConsole() = 0;
@@ -42,6 +42,7 @@ public:
     void setUserAddress(const string &address);
 
     /* Getters (Accessors) */
+    string getUserID() const;
     string getUserName() const;
     string getUserEmail() const;
     string getUserPhoneNumber() const;

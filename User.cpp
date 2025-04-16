@@ -11,13 +11,13 @@ using namespace std;
 User::User()
 {
     usersCount++;
-    generateID();
+    generateUserID();
 }
 
 User::User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : userName(name), userEmail(email), userPassword(pass), userPhoneNumber(phoneNum), userAddress(address)
 {
     usersCount++;
-    generateID();
+    generateUserID();
 }
 
 void User::registerUser()
@@ -48,7 +48,7 @@ bool User::verifyLogin(const string &e, const string &p)
     return (userEmail == e && userPassword == p);
 }
 
-void User::generateID()
+void User::generateUserID()
 {
     stringstream ss;
     ss << "U-" << setw(4) << setfill('0') << usersCount; // building the string stream
@@ -72,6 +72,7 @@ void User::setUserPhoneNumber(const string &phoneNumber) { userPhoneNumber = pho
 void User::setUserAddress(const string &address) { userAddress = address; }
 
 /* Getters */
+string User::getUserID() const { return userID; }
 string User::getUserName() const { return userName; }
 string User::getUserEmail() const { return userEmail; }
 string User::getUserPhoneNumber() const { return userPhoneNumber; }

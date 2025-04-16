@@ -21,7 +21,8 @@ public:
     Customer();
     Customer(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
 
-    void generateID() override;
+    static int getCustomersCount();
+    void generateUserID() override;
     void rentVehicle(); // vector of bookings and vehicles
     void returnVehicle(); // vector of bookings
     void viewAllBookings(); // vector of bookings
