@@ -8,7 +8,7 @@
 #include "Vehicle.h"
 using namespace std;
 
-Vehicle::Vehicle()
+Vehicle::Vehicle() : brand(""), model(""), licensePlate(""), ratePerDay(0.0), isAvailable(false)
 {
     vehiclesCount++;
     generateVehicleID();

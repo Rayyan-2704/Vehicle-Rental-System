@@ -8,7 +8,7 @@
 #include "User.h"
 using namespace std;
 
-User::User()
+User::User() : userName(""), userEmail(""), userPassword(""), userPhoneNumber(""), userAddress("")
 {
     usersCount++;
     generateUserID();
