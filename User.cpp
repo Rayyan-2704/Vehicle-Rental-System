@@ -8,19 +8,19 @@
 #include "User.h"
 using namespace std;
 
-User ::User()
+User::User()
 {
     usersCount++;
     generateID();
 }
 
-User ::User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : userName(name), userEmail(email), userPassword(pass), userPhoneNumber(phoneNum), userAddress(address)
+User::User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : userName(name), userEmail(email), userPassword(pass), userPhoneNumber(phoneNum), userAddress(address)
 {
     usersCount++;
     generateID();
 }
 
-void User ::registerUser()
+void User::registerUser()
 {
     cout << "Enter Full Name: ";
     getline(cin, userName);
@@ -34,7 +34,7 @@ void User ::registerUser()
     getline(cin, userAddress);
 }
 
-void User ::updateUserProfile(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address)
+void User::updateUserProfile(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address)
 {
     this->userName = name;
     this->userEmail = email;
@@ -43,19 +43,19 @@ void User ::updateUserProfile(const string &name, const string &email, const str
     this->userAddress = address;
 }
 
-bool User ::verifyLogin(const string &e, const string &p)
+bool User::verifyLogin(const string &e, const string &p)
 {
     return (userEmail == e && userPassword == p);
 }
 
-void User ::generateID()
+void User::generateID()
 {
     stringstream ss;
     ss << "U-" << setw(4) << setfill('0') << usersCount; // building the string stream
     userID = ss.str();                                   // extracting full string from the stream and assigning it to userID
 }
 
-void User ::displayUserInfo() const
+void User::displayUserInfo() const
 {
     cout << "User ID: " << userID << endl;
     cout << "Name: " << userName << endl;
@@ -65,22 +65,22 @@ void User ::displayUserInfo() const
 }
 
 /* Setters */
-void User ::setUserName(const string &name) { userName = name; }
-void User ::setUserEmail(const string &email) { userEmail = email; }
-void User ::setUserPassword(const string &password) { userPassword = password; }
-void User ::setUserPhoneNumber(const string &phoneNumber) { userPhoneNumber = phoneNumber; }
-void User ::setUserAddress(const string &address) { userAddress = address; }
+void User::setUserName(const string &name) { userName = name; }
+void User::setUserEmail(const string &email) { userEmail = email; }
+void User::setUserPassword(const string &password) { userPassword = password; }
+void User::setUserPhoneNumber(const string &phoneNumber) { userPhoneNumber = phoneNumber; }
+void User::setUserAddress(const string &address) { userAddress = address; }
 
 /* Getters */
-string User ::getUserName() const { return userName; }
-string User ::getUserEmail() const { return userEmail; }
-string User ::getUserPhoneNumber() const { return userPhoneNumber; }
-string User ::getUserAddress() const { return userAddress; }
-int User ::getUsersCount() { return usersCount; }
+string User::getUserName() const { return userName; }
+string User::getUserEmail() const { return userEmail; }
+string User::getUserPhoneNumber() const { return userPhoneNumber; }
+string User::getUserAddress() const { return userAddress; }
+int User::getUsersCount() { return usersCount; }
 
-User ::~User() {}
+User::~User() {}
 
-int User ::usersCount = 0;
+int User::usersCount = 0;
 
 bool isEmailValid(const string &email)
 {
