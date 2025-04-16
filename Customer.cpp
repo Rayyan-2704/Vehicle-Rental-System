@@ -99,4 +99,68 @@ void Customer::viewAllBookings()
     // Implementation to be done once Vehicle and its derived classes
 }
 
+void Customer::userConsole()
+{ // Parameter needed
+    string options[5] = {
+        "Edit Customer Details and Information.",
+        "Rent a Vehicle.",
+        "Return a Vehicle.",
+        "View All Bookings.",
+        "< Navigate Back >"
+    };
+
+    int choice = 1, maxChoices = 5;
+    bool exitStatus = false;
+    char pressedKey;
+
+    do
+    {
+        system("cls");
+        cout << "Customer Console" << endl;
+        cout << "Welcome, Customer " << userName << "!" << endl << endl;
+
+        cout << "Menu Actions:" << endl;
+        for (int i = 0; i < 5; i++)
+        {
+            // further addition required here
+            cout << ">> " << (i + 1) << ". " << options[i] << endl;
+        }
+
+        pressedKey = _getch();
+        if ((pressedKey == 'w' || pressedKey == 'W') && (choice > 1))
+        {
+            choice--;
+        }
+        else if ((pressedKey == 's' || pressedKey == 'S') && (choice < maxChoices))
+        {
+            choice++;
+        }
+        else if (pressedKey == '\r' || pressedKey == ' ') 
+        {
+            switch (choice)
+            {
+            case 1:
+                editDetails();
+                break;
+
+            case 2:
+                // rent vehicle function call
+                break;
+
+            case 3:
+                // return vehicle function call
+                break;
+
+            case 4:
+                // view all bookings function call
+                break;
+
+            case 5:
+                exitStatus = true;
+                break;
+            }
+        }
+    } while(!exitStatus);
+}
+
 int Customer::customersCount = 0;

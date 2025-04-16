@@ -105,8 +105,9 @@ void Admin::userConsole()
         "Edit Admin Details and Information.",
         "Add a New Vehicle to the Inventory.",
         "Remove a Vehicle from the Inventory.",
-        "View All Vehicles",
-        "< Navigate Back >"};
+        "View All Vehicles.",
+        "< Navigate Back >"
+    };
 
     int choice = 1, maxChoices = 5;
     bool exitStatus = false;
@@ -116,8 +117,7 @@ void Admin::userConsole()
     {
         system("cls");
         cout << "Admin Console" << endl;
-        cout << "Welcome, Admin " << userName << endl
-             << endl;
+        cout << "Welcome, Admin " << userName << "!" << endl << endl;
 
         cout << "Menu Actions:" << endl;
         for (int i = 0; i < 5; i++)
