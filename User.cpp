@@ -52,7 +52,7 @@ void User::generateID()
 {
     stringstream ss;
     ss << "U-" << setw(4) << setfill('0') << usersCount; // building the string stream
-    userID = ss.str();                                   // extracting full string from the stream and assigning it to userID
+    userID = ss.str();  // extracting full string from the stream and assigning it to userID
 }
 
 void User::displayUserInfo() const
