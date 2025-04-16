@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <conio.h>
+#include <iomanip>
+#include <cstdlib>
+
+#include "Customer.h"
+using namespace std;
+
+Customer::Customer()
+{
+    customersCount++;
+    generateID();
+}
+
+Customer::Customer(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address)
+{
+    customersCount++;
+    generateID();
+}
+
+void Customer::generateID()
+{
+    stringstream ss;
+    ss << "UC-" << setw(4) << setfill('0') << customersCount;
+    userID = ss.str();
+}
+
+void Customer::editDetails()
+{
+    system("cls");
+    string newName, newEmail, newPass, newPhone, newAddress;
+    cout << "Editing Customer " << userID << " details" << endl;
+
+    cout << "\tCurrent username: " << userName << endl;
+    cout << "\tEnter new username: ";
+    getline(cin, newName);
+
+    cout << "\n\tCurrent email: " << userEmail << endl;
+    cout << "\tEnter new email: ";
+    getline(cin, newEmail);
+    while (!isEmailValid(newEmail))
+    {
+        cout << "\tInvalid email entered! Please enter an email with the correct format:";
+        getline(cin, newEmail);
+    }
+
+    cout << "\n\tCurrent password: " << userPassword << endl;
+    cout << "\tEnter new password: ";
+    newPass = maskedPassword();
+
+    cout << "\n\tCurrent phone number: " << userPhoneNumber << endl;
+    cout << "\tEnter new phone number: ";
+    getline(cin, newPhone);
+
+    cout << "\n\tCurrent Address: " << userAddress << endl;
+    cout << "\tEnter new address: ";
+    getline(cin, newAddress);
+
+    system("cls");
+
+    char choice;
+    cout << "Username: " << newName << endl;
+    cout << "Email: " << newEmail << endl;
+    cout << "Password: " << userPassword << endl;
+    cout << "Phone Number: " << userPhoneNumber << endl;
+    cout << "Address: " << userAddress << endl;
+    cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
+    cin >> choice;
+
+    if (choice == 'y' || choice == 'Y')
+    {
+        updateUserProfile(newName, newEmail, newPass, newPhone, newAddress);
+        cout << "User profile updated successfully!" << endl;
+    }
+    else
+    {
+        cout << "Discarding the changes made." << endl;
+    }
+
+    cout << "Press any key to return to the main menu..." << endl;
+    _getch();
+}
+
+void Customer::rentVehicle()
+{
+    // Implementation to be done once Vehicle and its derived classes are made
+}
+
+void Customer::returnVehicle()
+{
+    // Implementation to be done once Vehicle and its derived classes are made
+}
+
+void Customer::viewAllBookings()
+{
+    // Implementation to be done once Vehicle and its derived classes
+}
+
+int Customer::customersCount = 0;
