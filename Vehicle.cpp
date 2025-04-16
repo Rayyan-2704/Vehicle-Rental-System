@@ -4,6 +4,7 @@
 #include <vector>
 #include <iomanip>
 #include <conio.h>
+#include <cstdlib>
 
 #include "Vehicle.h"
 using namespace std;

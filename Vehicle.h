@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iomanip>
 #include <conio.h>
+#include <cstdlib>
 using namespace std;
 
 class Vehicle
