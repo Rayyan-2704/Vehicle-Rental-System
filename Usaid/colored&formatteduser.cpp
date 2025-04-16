@@ -16,8 +16,18 @@
 #define COLOR_WHITE   "\033[37m"
 #define COLOR_BOLD    "\033[1m"
 
+// Terminal width for centering 
+#define TERMINAL_WIDTH 80
+
 #include "User.h"
 using namespace std;
+
+// Helper function to center text
+string centerText(const string& text, char fillchar = ' ') {
+    int padding = (TERMINAL_WIDTH - text.length()) / 2;
+    if (padding <= 0) return text;
+    return string(padding, fillchar) + text + string(padding, fillchar);
+}
 
 User::User()
 {
@@ -25,7 +35,10 @@ User::User()
     generateID();
 }
 
-User::User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : userName(name), userEmail(email), userPassword(pass), userPhoneNumber(phoneNum), userAddress(address)
+User::User(const string &name, const string &email, const string &pass, 
+          const string &phoneNum, const string &address) 
+    : userName(name), userEmail(email), userPassword(pass), 
+      userPhoneNumber(phoneNum), userAddress(address)
 {
     usersCount++;
     generateID();
@@ -33,46 +46,48 @@ User::User(const string &name, const string &email, const string &pass, const st
 
 void User::registerUser()
 {
-    cout << COLOR_CYAN << COLOR_BOLD << "Enter Full Name: " << COLOR_RESET;
+    cout << COLOR_CYAN << COLOR_BOLD << centerText("Enter Full Name: ") << COLOR_RESET;
     getline(cin, userName);
     
     string email;
     do {
-        cout << COLOR_CYAN << COLOR_BOLD << "Enter Email: " << COLOR_RESET;
+        cout << COLOR_CYAN << COLOR_BOLD << centerText("Enter Email: ") << COLOR_RESET;
         getline(cin, email);
         if (!isEmailValid(email)) {
-            cout << COLOR_RED << "Invalid email format! Please try again." << COLOR_RESET << endl;
+            cout << COLOR_RED << centerText("Invalid email format! Please try again.") << COLOR_RESET << endl;
         }
     } while (!isEmailValid(email));
     userEmail = email;
     
-    cout << COLOR_CYAN << COLOR_BOLD << "Enter Password: " << COLOR_RESET;
+    cout << COLOR_CYAN << COLOR_BOLD << centerText("Enter Password: ") << COLOR_RESET;
     userPassword = maskedPassword();
     
-    cout << COLOR_CYAN << COLOR_BOLD << "\nEnter Phone Number: " << COLOR_RESET;
+    cout << COLOR_CYAN << COLOR_BOLD << centerText("\nEnter Phone Number: ") << COLOR_RESET;
     getline(cin, userPhoneNumber);
     
-    cout << COLOR_CYAN << COLOR_BOLD << "Enter Address: " << COLOR_RESET;
+    cout << COLOR_CYAN << COLOR_BOLD << centerText("Enter Address: ") << COLOR_RESET;
     getline(cin, userAddress);
     
-    cout << COLOR_GREEN << "\nRegistration successful!" << COLOR_RESET << endl;
+    cout << COLOR_GREEN << centerText("\nRegistration successful!") << COLOR_RESET << endl;
 }
 
-void User::updateUserProfile(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address)
+void User::updateUserProfile(const string &name, const string &email, 
+                           const string &pass, const string &phoneNum, 
+                           const string &address)
 {
     this->userName = name;
     this->userEmail = email;
     this->userPassword = pass;
     this->userPhoneNumber = phoneNum;
     this->userAddress = address;
-    cout << COLOR_GREEN << "Profile updated successfully!" << COLOR_RESET << endl;
+    cout << COLOR_GREEN << centerText("Profile updated successfully!") << COLOR_RESET << endl;
 }
 
 bool User::verifyLogin(const string &e, const string &p)
 {
     bool success = (userEmail == e && userPassword == p);
     if (!success) {
-        cout << COLOR_RED << "Login failed! Invalid email or password." << COLOR_RESET << endl;
+        cout << COLOR_RED << centerText("Login failed! Invalid email or password.") << COLOR_RESET << endl;
     }
     return success;
 }
@@ -86,13 +101,13 @@ void User::generateID()
 
 void User::displayUserInfo() const
 {
-    cout << COLOR_YELLOW << COLOR_BOLD << "\n=== USER INFORMATION ===" << COLOR_RESET << endl;
-    cout << COLOR_BLUE << "User ID: " << COLOR_RESET << userID << endl;
-    cout << COLOR_BLUE << "Name: " << COLOR_RESET << userName << endl;
-    cout << COLOR_BLUE << "Email: " << COLOR_RESET << userEmail << endl;
-    cout << COLOR_BLUE << "Phone Number: " << COLOR_RESET << userPhoneNumber << endl;
-    cout << COLOR_BLUE << "Address: " << COLOR_RESET << userAddress << endl;
-    cout << COLOR_YELLOW << "=========================" << COLOR_RESET << endl;
+    cout << COLOR_YELLOW << COLOR_BOLD << centerText("\n=== USER INFORMATION ===") << COLOR_RESET << endl;
+    cout << COLOR_BLUE << centerText("User ID: " + userID) << COLOR_RESET << endl;
+    cout << COLOR_BLUE << centerText("Name: " + userName) << COLOR_RESET << endl;
+    cout << COLOR_BLUE << centerText("Email: " + userEmail) << COLOR_RESET << endl;
+    cout << COLOR_BLUE << centerText("Phone Number: " + userPhoneNumber) << COLOR_RESET << endl;
+    cout << COLOR_BLUE << centerText("Address: " + userAddress) << COLOR_RESET << endl;
+    cout << COLOR_YELLOW << centerText("=========================") << COLOR_RESET << endl;
 }
 
 /* Setters */
@@ -115,32 +130,14 @@ int User::usersCount = 0;
 
 bool isEmailValid(const string &email)
 {
-    // Ensure that the email does not contain any spaces
-    if (email.find(' ') != string::npos)
-    {
-        return false;
-    }
+    if (email.find(' ') != string::npos) return false;
 
     size_t atPos = email.find('@');
     size_t dotPos = email.find('.', atPos);
 
-    // Ensure that both '@' and '.' are present
-    if (atPos == string::npos || dotPos == string::npos)
-    {
-        return false;
-    }
-
-    // Ensure proper positioning of '@' and '.'
-    if (atPos == 0 || dotPos - atPos <= 1 || dotPos + 2 >= email.length())
-    {
-        return false;
-    }
-
-    // Ensure that '@' does not appear more than once
-    if (email.find('@', atPos + 1) != string::npos)
-    {
-        return false;
-    }
+    if (atPos == string::npos || dotPos == string::npos) return false;
+    if (atPos == 0 || dotPos - atPos <= 1 || dotPos + 2 >= email.length()) return false;
+    if (email.find('@', atPos + 1) != string::npos) return false;
 
     return true;
 }
