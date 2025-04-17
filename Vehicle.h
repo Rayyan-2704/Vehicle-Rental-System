@@ -28,9 +28,9 @@ public:
 
     /* Vehicle Utility Methods */
     virtual void generateVehicleID();
-    virtual void displayCarDetails(ostream &os) const = 0;
+    virtual void displayVehicleDetails(ostream &os) const = 0;
     virtual void addVehicle() = 0;
-    virtual void removeVehicle(vector <Vehicle*> &inventory, const string &id) = 0;
+    void removeVehicle(vector <Vehicle*> &inventory, const string &id); 
 
     /* Setters (Mutators) */
     void setBrand(const string &b);

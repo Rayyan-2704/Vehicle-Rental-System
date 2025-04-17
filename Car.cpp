@@ -32,9 +32,9 @@ void Car::generateVehicleID()
     vehicleID = ss.str();
 }
 
-void Car::displayCarDetails(ostream &os) const
+void Car::displayVehicleDetails(ostream &os) const
 {
-
+    os << "Brand: " << brand << " | Model: " << model << " | Rate Per Day: " << ratePerDay << endl;
 }
 
 void Car::addVehicle() 
@@ -53,11 +53,6 @@ void Car::addVehicle()
     getline(cin, fuelType);
     isAvailable = true;
     vehicleType = "car";
-}
-
-void Car::removeVehicle(vector <Vehicle*> &inventory, const string &id)
-{
-    
 }
 
 Car::~Car() { carsCount--; }

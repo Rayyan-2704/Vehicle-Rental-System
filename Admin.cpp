@@ -89,6 +89,7 @@ void Admin::editDetails()
 void Admin::addVehicleToInventory()
 {
     // Implementation to be done once Vehicle and its derived classes are made
+    system("cls");
 }
 
 void Admin::removeVehicleFromInventory()

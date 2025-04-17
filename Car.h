@@ -26,9 +26,8 @@ public:
     static int getCarsCount();
     
     void generateVehicleID() override;
-    void displayCarDetails(ostream &os) const override;
+    void displayVehicleDetails(ostream &os) const override;
     void addVehicle() override;
-    void removeVehicle(vector <Vehicle*> &inventory, const string &id) override;
 
     ~Car();
 };

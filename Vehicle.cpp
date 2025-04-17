@@ -28,6 +28,20 @@ void Vehicle::generateVehicleID()
     vehicleID = ss.str();
 }
 
+void Vehicle::removeVehicle(vector <Vehicle*> &inventory, const string &id)
+{
+    for (auto iter = inventory.begin(); iter != inventory.end(); iter++)
+    {
+        if ((*iter)->getVehicleID() == id)
+        {
+            delete *iter;
+            inventory.erase(iter);
+            cout << "Vehicle (" << id << ") has been removed from the inventory successfully." << endl;
+            return;
+        } 
+    }
+}
+
 /* Setters */
 void Vehicle::setBrand(const string &b) { brand = b; }
 void Vehicle::setModel(const string &m) { model = m; }
@@ -50,6 +64,6 @@ int Vehicle::vehiclesCount = 0;
 
 ostream &operator<<(ostream &os, const Vehicle &v)
 {
-    v.displayCarDetails(os);
+    v.displayVehicleDetails(os);
     return os;
 }
