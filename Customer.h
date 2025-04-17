@@ -28,6 +28,8 @@ public:
     void viewAllBookings(); // vector of bookings
     void userConsole() override; // vector of bookings & vehicles in parameter
     void editDetails() override;
+
+    ~Customer();
 };
 
 #endif

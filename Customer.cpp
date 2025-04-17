@@ -165,4 +165,6 @@ void Customer::userConsole()
     } while(!exitStatus);
 }
 
+Customer::~Customer() { customersCount--; }
+
 int Customer::customersCount = 0;

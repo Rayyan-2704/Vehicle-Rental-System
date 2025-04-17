@@ -80,7 +80,7 @@ string User::getUserPhoneNumber() const { return userPhoneNumber; }
 string User::getUserAddress() const { return userAddress; }
 int User::getUsersCount() { return usersCount; }
 
-User::~User() {}
+User::~User() { usersCount--; }
 
 int User::usersCount = 0;
 

@@ -19,17 +19,18 @@ protected:
     string licensePlate;
     double ratePerDay;
     bool isAvailable;
+    string vehicleType;
     static int vehiclesCount;
 
 public:
     Vehicle();
-    Vehicle(const string &b, const string &m, const string &l, double rate, bool available);
+    Vehicle(const string &b, const string &m, const string &l, double rate, bool available, const string vT);
 
     /* Vehicle Utility Methods */
     virtual void generateVehicleID();
     virtual void displayCarDetails(ostream &os) const = 0;
-    virtual Vehicle *addVehicle() = 0;
-    virtual void removeVehicle() = 0;
+    virtual void addVehicle() = 0;
+    virtual void removeVehicle(vector <Vehicle*> &inventory, const string &id) = 0;
 
     /* Setters (Mutators) */
     void setBrand(const string &b);

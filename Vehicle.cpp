@@ -15,7 +15,7 @@ Vehicle::Vehicle() : brand(""), model(""), licensePlate(""), ratePerDay(0.0), is
     generateVehicleID();
 }
 
-Vehicle::Vehicle(const string &b, const string &m, const string &l, double rate, bool available) : brand(b), model(m), licensePlate(l), ratePerDay(rate), isAvailable(available)
+Vehicle::Vehicle(const string &b, const string &m, const string &l, double rate, bool available, const string vT) : brand(b), model(m), licensePlate(l), ratePerDay(rate), isAvailable(available), vehicleType(vT)
 {
     vehiclesCount++;
     generateVehicleID();
@@ -44,7 +44,7 @@ double Vehicle::getRatePerDay() const { return ratePerDay; }
 bool Vehicle::getAvailability() const { return isAvailable; }
 int Vehicle::getVehiclesCount() { return vehiclesCount; }
 
-Vehicle::~Vehicle() {}
+Vehicle::~Vehicle() { vehiclesCount--; }
 
 int Vehicle::vehiclesCount = 0;
 

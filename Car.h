@@ -27,8 +27,10 @@ public:
     
     void generateVehicleID() override;
     void displayCarDetails(ostream &os) const override;
-    Vehicle *addVehicle() override;
-    void removeVehicle() override;
+    void addVehicle() override;
+    void removeVehicle(vector <Vehicle*> &inventory, const string &id) override;
+
+    ~Car();
 };
 
 #endif

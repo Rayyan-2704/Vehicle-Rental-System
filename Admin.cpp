@@ -165,4 +165,6 @@ void Admin::userConsole()
     } while (!exitStatus);
 }
 
+Admin::~Admin() { adminsCount--; }
+
 int Admin::adminsCount = 0;

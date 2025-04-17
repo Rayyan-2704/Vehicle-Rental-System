@@ -27,6 +27,8 @@ public:
     void viewAllVehicles();            // vector of vehicles in parameter
     void userConsole() override;       // vector of vehicles in parameter
     void editDetails() override;
+
+    ~Admin();
 };
 
 #endif
