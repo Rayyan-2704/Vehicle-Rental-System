@@ -1,0 +1,83 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
+#include <ctime>
+
+using namespace std;
+
+class Rental {
+private:
+    int rentalID;
+    int userID;
+    int vehicleID;
+    string rentDate;    //  YYYY-MM-DD
+    string returnDate;  //  YYYY-MM-DD
+    float totalCost;
+    string status;
+
+    time_t convertToDate(const string& dateStr) {
+        tm TM = {};
+        istringstream ss(dateStr);
+        ss >> get_time(&TM, "%Y-%m-%d");
+        TM.tm_hour = 0; TM.tm_min = 0; TM.tm_sec = 0;
+        return mktime(&TM);
+    }
+
+public:
+    Rental(int rID, int uID, int vID, string rDate, string retDate, string stat)
+        : rentalID(rID), userID(uID), vehicleID(vID), rentDate(rDate),
+          returnDate(retDate), status(stat), totalCost(0.0f) {}
+
+    // Const Getters
+    int getRentalID() const { return rentalID; }
+    int getUserID() const { return userID; }
+    int getVehicleID() const { return vehicleID; }
+    string getRentDate() const { return rentDate; }
+    string getReturnDate() const { return returnDate; }
+    float getTotalCost() const { return totalCost; }
+    string getStatus() const { return status; }
+
+    // Setters for returnDate and totalCost
+    void setReturnDate(const string& newReturnDate) {
+        returnDate = newReturnDate;
+    }
+
+    void setTotalCost(float newTotalCost) {
+        totalCost = newTotalCost;
+    }
+
+    int calculateDuration() {
+        time_t rent = convertToDate(rentDate);
+        time_t ret = convertToDate(returnDate);
+        double seconds = difftime(ret, rent);
+        return static_cast<int>(seconds / (60*60*24)); 
+    }
+
+    void calculateCost(float perDay) {
+        int duration = calculateDuration();
+        totalCost = duration * perDay;
+    }
+
+    void displayReceipt() {
+        cout << "Rental Receipt" << endl;
+        cout << "-----------------------------" << endl;
+        cout << "Rental ID   : " << rentalID << endl;
+        cout << "User ID     : " << userID << endl;
+        cout << "Vehicle ID  : " << vehicleID << endl;
+        cout << "Rent Date   : " << rentDate << endl;
+        cout << "Return Date : " << returnDate << endl;
+        cout << "Status      : " << status << endl;
+        cout << "Total Cost  : $" << fixed << setprecision(2) << totalCost << endl;
+        cout << "-----------------------------" << endl;
+    }
+};
+
+
+int main() {
+    Rental booking(101, 501, 301, "2025-04-10", "2025-04-15", "Returned");
+    booking.calculateCost(50.0f); 
+    booking.displayReceipt();
+
+    return 0;
+}
