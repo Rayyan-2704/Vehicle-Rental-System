@@ -34,7 +34,7 @@ void Bike::generateVehicleID()
 
 void Bike::displayVehicleDetails(ostream &os) const
 {
-    os << "Brand: " << brand << " | Model: " << model << " | Rate Per Day: " << ratePerDay << endl;
+    os << "Brand: " << brand << " | Model: " << model << " | Rate Per Day: $" << ratePerDay << endl;
 }
 
 void Bike::addVehicle()
