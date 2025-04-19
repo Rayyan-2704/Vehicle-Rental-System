@@ -22,10 +22,10 @@ public:
 
     static int getAdminsCount();
     void generateUserID() override;
-    void addVehicleToInventory();      // vector of vehicles in parameter
-    void removeVehicleFromInventory(); // vector of vehicles in parameter
-    void viewAllVehicles();            // vector of vehicles in parameter
-    void userConsole() override;       // vector of vehicles in parameter
+    void addVehicleToInventory(vector <Vehicle*> &inventory);
+    void removeVehicleFromInventory(vector <Vehicle*> &inventory);
+    void viewAllVehicles(vector <Vehicle*> &inventory);
+    void userConsole(vector <Vehicle*> &inventory) override;
     void editDetails() override;
 
     ~Admin();

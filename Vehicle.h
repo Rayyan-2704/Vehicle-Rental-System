@@ -30,7 +30,6 @@ public:
     virtual void generateVehicleID();
     virtual void displayVehicleDetails(ostream &os) const = 0;
     virtual void addVehicle() = 0;
-    void removeVehicle(vector <Vehicle*> &inventory, const string &id); 
 
     /* Setters (Mutators) */
     void setBrand(const string &b);
@@ -38,6 +37,7 @@ public:
     void setLicensePlate(const string &l);
     void setRatePerDay(double rate);
     void setAvailability(bool available);
+    void setVehicleType(const string &type);
 
     /* Getters (Accessors) */
     string getVehicleID() const;
@@ -46,6 +46,7 @@ public:
     string getLicensePlate() const;
     double getRatePerDay() const;
     bool getAvailability() const;
+    string getVehicleType() const;
     static int getVehiclesCount();
 
     /* Operator Overloaded Friend Function */

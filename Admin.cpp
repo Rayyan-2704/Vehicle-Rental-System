@@ -63,16 +63,17 @@ void Admin::editDetails()
 
     system("cls");
 
-    char choice;
+    char confirmation;
     cout << "Username: " << newName << endl;
     cout << "Email: " << newEmail << endl;
     cout << "Password: " << userPassword << endl;
     cout << "Phone Number: " << userPhoneNumber << endl;
     cout << "Address: " << userAddress << endl;
     cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
-    cin >> choice;
+    cin >> confirmation;
+    cin.ignore();
 
-    if (choice == 'y' || choice == 'Y')
+    if (confirmation == 'y' || confirmation == 'Y')
     {
         updateUserProfile(newName, newEmail, newPass, newPhone, newAddress);
         cout << "User profile updated successfully!" << endl;
@@ -86,29 +87,152 @@ void Admin::editDetails()
     _getch();
 }
 
-void Admin::addVehicleToInventory()
+void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
 {
-    // Implementation to be done once Vehicle and its derived classes are made
+    Vehicle *newVehicle;
+    string options[3] = {"Car", "Bike", "Truck"};
+
+    int choice = 1, maxChoices = 3;
+    bool optionChosen = false;
+    char pressedKey, confirmation;
+
+    do
+    {
+        system("cls");
+        cout << "Adding new vehicle to the inventory" << endl;
+
+        cout << "Choose the vehicle type:" << endl;
+        for (int i = 0; i < 3; i++)
+        {
+            // further addition required here
+            cout << ">> " << (i + 1) << ". " << options[i] << endl;
+        }
+
+        pressedKey = _getch();
+        if ((pressedKey == 'w' || pressedKey == 'W'|| pressedKey == 72) && (choice > 1))
+        {
+            choice--;
+        }
+        else if ((pressedKey == 's' || pressedKey == 'S' || pressedKey == 80) && (choice < maxChoices))
+        {
+            choice++;
+        }
+        else if (pressedKey == '\r' || pressedKey == ' ')
+        {
+            switch (choice)
+            {
+            case 1:
+                newVehicle = new Car();
+                optionChosen = true;
+                break;
+
+            case 2:
+                newVehicle = new Bike();
+                optionChosen = true;
+                break;
+
+            case 3:
+                newVehicle = new Truck();
+                optionChosen = true;
+                break;
+            }
+        }
+    } while (!optionChosen);
+
+    newVehicle->addVehicle();
+
+    cout << endl << "Please confirm to add the new vehicle to the inventory. (Y/N): ";
+    cin >> confirmation;
+    cin.ignore();
+    
+    if (confirmation == 'y' || confirmation == 'Y')
+    {
+        inventory.push_back(newVehicle);
+        cout << "New vehicle (" << newVehicle->getVehicleID() << ") has been added to inventory successfully!" << endl;
+    }
+    else
+    {
+        delete newVehicle;
+        cout << "Discarding the changes made." << endl;
+    }
+
+    cout << "Press any key to return to the main menu..." << endl;
+    _getch();
+}
+
+void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
+{
+    string id;
+    bool flag = false;
+    char confirmation;
+    int i;
+
     system("cls");
+    cout << "Removing vehicle from the inventory" << endl;
+
+    for (i = 0; i < inventory.size(); i++)
+    {
+        cout << "Vehicle " << (i + 1) << ": " << inventory[i]->getVehicleID() << " | Vehicle Type: " << inventory[i]->getVehicleType() << endl;
+    }
+
+    cout << endl << "Enter the vehicle ID of the vehicle to be removed from the inventory: ";
+    getline(cin, id);
+
+    for (i = 0; i < inventory.size(); i++)
+    {
+        if (id == inventory[i]->getVehicleID()) 
+        {
+            flag = true;
+            break;
+        }
+    }
+
+    while (!flag)
+    {
+        cout << endl << "Invalid vehicle ID!" << endl << "Enter the valid vehicle ID of the vehicle to be removed from the inventory: ";
+        getline(cin, id);
+
+        for (i = 0; i < inventory.size(); i++)
+        {
+            if (id == inventory[i]->getVehicleID()) 
+            {
+                flag = true;
+                break;
+            }
+        }
+    }
+
+    cout << endl << "Please confirm to remove vehicle (" << id << ") from the inventory. (Y/N): ";
+    cin >> confirmation;
+    cin.ignore();
+    
+    if (confirmation == 'y' || confirmation == 'Y')
+    {
+        delete inventory[i];
+        inventory.erase(inventory.begin() + i);
+        cout << "Vehicle (" << id << ") has been removed from inventory successfully!" << endl;
+    }
+    else
+    {
+        cout << "Discarding the changes made." << endl;
+    }
+
+    cout << "Press any key to return to the main menu..." << endl;
+    _getch();
 }
 
-void Admin::removeVehicleFromInventory()
+void Admin::viewAllVehicles(vector <Vehicle*> &inventory)
 {
     // Implementation to be done once Vehicle and its derived classes are made
 }
 
-void Admin::viewAllVehicles()
-{
-    // Implementation to be done once Vehicle and its derived classes are made
-}
-
-void Admin::userConsole()
-{ // Parameter needed
+void Admin::userConsole(vector <Vehicle*> &inventory)
+{ 
     string options[5] = {
-        "Edit Admin Details and Information.",
-        "Add a New Vehicle to the Inventory.",
-        "Remove a Vehicle from the Inventory.",
-        "View All Vehicles.",
+        "Edit Admin Details and Information",
+        "Add a New Vehicle to the Inventory",
+        "Remove a Vehicle from the Inventory",
+        "View All Vehicles",
         "< Navigate Back >"
     };
 
@@ -130,11 +254,11 @@ void Admin::userConsole()
         }
 
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W') && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 1))
         {
             choice--;
         }
-        else if ((pressedKey == 's' || pressedKey == 'S') && (choice < maxChoices))
+        else if ((pressedKey == 's' || pressedKey == 'S'|| pressedKey == 80) && (choice < maxChoices))
         {
             choice++;
         }
@@ -147,15 +271,15 @@ void Admin::userConsole()
                 break;
 
             case 2:
-                // add vehicle function call
+                addVehicleToInventory(inventory);
                 break;
 
             case 3:
-                // remove vehicle function call
+                removeVehicleFromInventory(inventory);
                 break;
 
             case 4:
-                // view all vehicles function call
+                viewAllVehicles(inventory);
                 break;
 
             case 5:

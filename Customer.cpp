@@ -63,16 +63,16 @@ void Customer::editDetails()
 
     system("cls");
 
-    char choice;
+    char confirmation;
     cout << "Username: " << newName << endl;
     cout << "Email: " << newEmail << endl;
     cout << "Password: " << userPassword << endl;
     cout << "Phone Number: " << userPhoneNumber << endl;
     cout << "Address: " << userAddress << endl;
     cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
-    cin >> choice;
+    cin >> confirmation;
 
-    if (choice == 'y' || choice == 'Y')
+    if (confirmation == 'y' || confirmation == 'Y')
     {
         updateUserProfile(newName, newEmail, newPass, newPhone, newAddress);
         cout << "User profile updated successfully!" << endl;
@@ -129,11 +129,11 @@ void Customer::userConsole()
         }
 
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W') && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 1))
         {
             choice--;
         }
-        else if ((pressedKey == 's' || pressedKey == 'S') && (choice < maxChoices))
+        else if ((pressedKey == 's' || pressedKey == 'S' || pressedKey == 80) && (choice < maxChoices))
         {
             choice++;
         }

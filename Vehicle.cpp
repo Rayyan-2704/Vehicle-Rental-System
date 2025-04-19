@@ -28,26 +28,13 @@ void Vehicle::generateVehicleID()
     vehicleID = ss.str();
 }
 
-void Vehicle::removeVehicle(vector <Vehicle*> &inventory, const string &id)
-{
-    for (auto iter = inventory.begin(); iter != inventory.end(); iter++)
-    {
-        if ((*iter)->getVehicleID() == id)
-        {
-            delete *iter;
-            inventory.erase(iter);
-            cout << "Vehicle (" << id << ") has been removed from the inventory successfully." << endl;
-            return;
-        } 
-    }
-}
-
 /* Setters */
 void Vehicle::setBrand(const string &b) { brand = b; }
 void Vehicle::setModel(const string &m) { model = m; }
 void Vehicle::setLicensePlate(const string &l) { licensePlate = l; }
 void Vehicle::setRatePerDay(double rate) { ratePerDay = rate; }
 void Vehicle::setAvailability(bool available) { isAvailable = available; }
+void Vehicle::setVehicleType(const string &type) { vehicleType = type; } 
 
 /* Getters */
 string Vehicle::getVehicleID() const { return vehicleID; }
@@ -56,6 +43,7 @@ string Vehicle::getModel() const { return model; }
 string Vehicle::getLicensePlate() const { return licensePlate; }
 double Vehicle::getRatePerDay() const { return ratePerDay; }
 bool Vehicle::getAvailability() const { return isAvailable; }
+string Vehicle::getVehicleType() const { return vehicleType; }
 int Vehicle::getVehiclesCount() { return vehiclesCount; }
 
 Vehicle::~Vehicle() { vehiclesCount--; }

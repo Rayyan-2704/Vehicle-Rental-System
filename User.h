@@ -8,6 +8,10 @@
 #include <iomanip>
 #include <conio.h>
 #include <cstdlib>
+
+#include "Car.h"
+#include "Bike.h"
+#include "Truck.h"
 using namespace std;
 
 class User
@@ -33,7 +37,7 @@ public:
     virtual void generateUserID();
     virtual void displayUserInfo() const;
     virtual void editDetails() = 0;
-    virtual void userConsole() = 0;
+    virtual void userConsole(vector <Vehicle*> &inventory) = 0;
 
     /* Setters (Mutators) */
     void setUserName(const string &name);
