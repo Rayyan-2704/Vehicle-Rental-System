@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 
@@ -101,7 +102,7 @@ void Customer::viewAllBookings()
     // Implementation to be done once Vehicle and its derived classes
 }
 
-void Customer::userConsole()
+void Customer::userConsole(vector <Vehicle*> &inventory)
 { // Parameter needed
     string options[5] = {
         "Edit Customer Details and Information.",

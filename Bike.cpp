@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 
@@ -15,7 +16,7 @@ Bike::Bike() : engineCC(0)
     generateVehicleID();
 }
 
-Bike::Bike(const string &b, const string &m, const string &l, double rate, bool available, int cc) : Vehicle(b, m, l, rate, available, "bike"), engineCC(cc)
+Bike::Bike(const string &b, const string &m, const string &l, double rate, bool available, int cc) : Vehicle(b, m, l, rate, available, "Bike"), engineCC(cc)
 {
     bikesCount++;
     generateVehicleID();
@@ -34,7 +35,8 @@ void Bike::generateVehicleID()
 
 void Bike::displayVehicleDetails(ostream &os) const
 {
-    os << "Brand: " << brand << " | Model: " << model << " | Rate Per Day: $" << ratePerDay << endl;
+    os << "Vehicle ID: " << vehicleID << " | Brand: " << brand << " | Model: " << model << " | Vehicle Type: " << endl;
+    os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Engine CC: " << engineCC << "CC" <<endl;
 }
 
 void Bike::addVehicle()
@@ -52,7 +54,7 @@ void Bike::addVehicle()
     cin >> engineCC;
     cin.ignore();
     isAvailable = true;
-    vehicleType = "bike";   
+    vehicleType = "Bike";   
 }
 
 Bike::~Bike() { bikesCount--; }

@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 
@@ -148,7 +149,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
     if (confirmation == 'y' || confirmation == 'Y')
     {
         inventory.push_back(newVehicle);
-        cout << "New vehicle (" << newVehicle->getVehicleID() << ") has been added to inventory successfully!" << endl;
+        cout << "New vehicle (" << newVehicle->getVehicleID() << ") has been added to the inventory successfully!" << endl;
     }
     else
     {
@@ -180,7 +181,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
 
     for (i = 0; i < inventory.size(); i++)
     {
-        if (id == inventory[i]->getVehicleID()) 
+        if (cleanString(id) == inventory[i]->getVehicleID()) 
         {
             flag = true;
             break;
@@ -194,7 +195,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
 
         for (i = 0; i < inventory.size(); i++)
         {
-            if (id == inventory[i]->getVehicleID()) 
+            if (cleanString(id) == inventory[i]->getVehicleID()) 
             {
                 flag = true;
                 break;
@@ -210,7 +211,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
     {
         delete inventory[i];
         inventory.erase(inventory.begin() + i);
-        cout << "Vehicle (" << id << ") has been removed from inventory successfully!" << endl;
+        cout << "Vehicle (" << id << ") has been removed from the inventory successfully!" << endl;
     }
     else
     {
@@ -223,7 +224,19 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
 
 void Admin::viewAllVehicles(vector <Vehicle*> &inventory)
 {
-    // Implementation to be done once Vehicle and its derived classes are made
+    cout << "Viewing All Vehicles From The Inventory" << endl;
+    for (int i = 0; i < inventory.size(); i++)
+    {
+        cout << *inventory[i];
+    }
+
+    cout << endl << "Total number of vehicles in the inventory: " << Vehicle::getVehiclesCount() << endl;
+    cout << "Total number of cars in the inventory: " << Car::getCarsCount() << endl;
+    cout << "Total number of bikes in the inventory: " << Bike::getBikesCount() << endl;
+    cout << "Total number of trucks in the inventory: " << Truck::getTrucksCount() << endl;
+
+    cout << "Press any key to return to the main menu..." << endl;
+    _getch();
 }
 
 void Admin::userConsole(vector <Vehicle*> &inventory)

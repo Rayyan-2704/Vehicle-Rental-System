@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 

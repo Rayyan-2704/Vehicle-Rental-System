@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 
@@ -138,4 +139,14 @@ string maskedPassword()
         }
     }
     return NewPassword;
+}
+
+string cleanString(const string& input) {
+    string result;
+    for (char ch : input) {
+        if (isalpha(ch)) {
+            result += tolower(ch);
+        }
+    }
+    return result;
 }

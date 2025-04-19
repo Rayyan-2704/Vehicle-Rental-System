@@ -6,6 +6,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 
@@ -63,5 +64,8 @@ bool isEmailValid(const string &email);
 
 /* Ensuring that when password is entered onto the console, it is masked by asterisks '*' */
 string maskedPassword();
+
+/* Converting the string to lowercase and removing punctuation if any */
+string cleanString(const string& input);
 
 #endif

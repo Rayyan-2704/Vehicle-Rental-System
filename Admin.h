@@ -6,6 +6,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 

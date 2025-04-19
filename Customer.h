@@ -6,6 +6,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 #include <conio.h>
 #include <cstdlib>
 
@@ -26,7 +27,7 @@ public:
     void rentVehicle(); // vector of bookings and vehicles
     void returnVehicle(); // vector of bookings
     void viewAllBookings(); // vector of bookings
-    void userConsole() override; // vector of bookings & vehicles in parameter
+    void userConsole(vector <Vehicle*> &inventory) override; // vector of bookings & vehicles in parameter
     void editDetails() override;
 
     ~Customer();
