@@ -36,7 +36,7 @@ void Bike::generateVehicleID()
 void Bike::displayVehicleDetails(ostream &os) const
 {
     os << "Vehicle ID: " << vehicleID << " | Brand: " << brand << " | Model: " << model << " | Vehicle Type: " << endl;
-    os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Engine CC: " << engineCC << "CC" <<endl;
+    os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Engine CC: " << engineCC << " CC" <<endl;
 }
 
 void Bike::addVehicle()

@@ -36,7 +36,7 @@ void Truck::generateVehicleID()
 void Truck::displayVehicleDetails(ostream &os) const
 {
     os << "Vehicle ID: " << vehicleID << " | Brand: " << brand << " | Model: " << model << " | Vehicle Type: " << endl;
-    os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Load Capacity: " << loadCapacity << "kg" << endl;
+    os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Load Capacity: " << loadCapacity << " kg" << endl;
 }
 
 void Truck::addVehicle()
