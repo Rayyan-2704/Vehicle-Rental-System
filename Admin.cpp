@@ -222,8 +222,9 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
     _getch();
 }
 
-void Admin::viewAllVehicles(vector <Vehicle*> &inventory)
+void Admin::viewAllVehicles(const vector <Vehicle*> &inventory)
 {
+    system("cls");
     cout << "Viewing All Vehicles From The Inventory" << endl;
     for (int i = 0; i < inventory.size(); i++)
     {

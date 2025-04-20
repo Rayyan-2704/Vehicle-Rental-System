@@ -264,9 +264,19 @@ void Customer::returnVehicle(vector <Vehicle*> &inventory)
     _getch();
 }
 
-void Customer::viewAllBookings()
+void Customer::viewAllBookings() const
 {
-    // in progress
+    system("cls");
+    cout << "Viewing All Bookings Of Customer" << endl;
+
+    cout << "Current Bookings of " << userName << " (" <<  userID << "):" << endl;
+    for (int i = 0; i < bookings.size(); i++)
+    {
+        bookings[i].displayBookingDetails();
+    }
+
+    cout << "Press any key to return to the main menu..." << endl;
+    _getch();
 }
 
 void Customer::userConsole(vector <Vehicle*> &inventory)

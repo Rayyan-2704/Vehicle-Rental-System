@@ -25,7 +25,7 @@ public:
     void generateUserID() override;
     void addVehicleToInventory(vector <Vehicle*> &inventory);
     void removeVehicleFromInventory(vector <Vehicle*> &inventory);
-    void viewAllVehicles(vector <Vehicle*> &inventory);
+    void viewAllVehicles(const vector <Vehicle*> &inventory);
     void userConsole(vector <Vehicle*> &inventory) override;
     void editDetails() override;
 

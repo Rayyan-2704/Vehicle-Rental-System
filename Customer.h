@@ -27,7 +27,7 @@ public:
     void generateUserID() override;
     void rentVehicle(vector <Vehicle*> &inventory);
     void returnVehicle(vector <Vehicle*> &inventory);
-    void viewAllBookings();
+    void viewAllBookings() const ;
     void userConsole(vector <Vehicle*> &inventory) override;
     void editDetails() override;
 
