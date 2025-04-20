@@ -18,10 +18,11 @@ Booking::Booking() : bookedVehicleID(""), bookedCustomerID(""), rentDuration(0),
     setRentDateToToday();
 }
 
-Booking::Booking(const string &vID, const string &cID, const string &dateOfRent, int days, double rentPerDay) : bookedVehicleID(vID), bookedCustomerID(cID), rentDate(dateOfRent), rentDuration(days)
+Booking::Booking(const string &vID, const string &cID, int days, double rentPerDay) : bookedVehicleID(vID), bookedCustomerID(cID), rentDuration(days)
 {
     bookingsCount++;
     generateBookingID();
+    setRentDateToToday();
     rentalCost = rentDuration * rentPerDay;
 }
 
@@ -35,7 +36,7 @@ void Booking::generateBookingID()
 void Booking::displayBookingDetails() const
 {
     cout << "Booking ID: " << bookingID << " | Booked Vehicle ID: " << bookedVehicleID << " | Booked Customer ID: " << bookedCustomerID << endl;
-    cout << "Rent Date: " << rentDate << " | Rent Duration: " << rentDuration <<  " days" << endl;
+    cout << "Rent Date: " << rentDate << " | Rent Duration: " << rentDuration <<  " days" << " | Total Rental Cost: $"  << rentalCost << endl;
 }
 
 void Booking::setBookedVehicleID(const string &vID) { bookedVehicleID = vID; }

@@ -65,7 +65,7 @@ bool isEmailValid(const string &email);
 /* Ensuring that when password is entered onto the console, it is masked by asterisks '*' */
 string maskedPassword();
 
-/* Converting the string to lowercase and removing punctuation if any */
-string cleanString(const string& input);
+/* Converting the string to lowercase */
+string lowercaseString(const string& input);
 
 #endif

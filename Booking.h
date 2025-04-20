@@ -25,9 +25,9 @@ class Booking
 public:
     /* Constructors */
     Booking();
-    Booking(const string &vID, const string &cID, const string &dateOfRent, int days, double rentPerDay);
+    Booking(const string &vID, const string &cID, int days, double rentPerDay);
 
-    /* Utility Method */
+    /* Utility Methods */
     void generateBookingID();
     void displayBookingDetails() const;
 
@@ -50,6 +50,5 @@ public:
     /* Destructor */
     ~Booking();
 };
-
 
 #endif

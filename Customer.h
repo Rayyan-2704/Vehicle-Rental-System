@@ -10,13 +10,14 @@
 #include <conio.h>
 #include <cstdlib>
 
+#include "Booking.h"
 #include "User.h"
 using namespace std;
 
 class Customer : public User 
 {
+    vector <Booking> bookings;
     static int customersCount;
-    // vector for bookings
 
 public:
     Customer();
@@ -24,10 +25,10 @@ public:
 
     static int getCustomersCount();
     void generateUserID() override;
-    void rentVehicle(); // vector of bookings and vehicles
-    void returnVehicle(); // vector of bookings
-    void viewAllBookings(); // vector of bookings
-    void userConsole(vector <Vehicle*> &inventory) override; // vector of bookings & vehicles in parameter
+    void rentVehicle(vector <Vehicle*> &inventory);
+    void returnVehicle(vector <Vehicle*> &inventory);
+    void viewAllBookings();
+    void userConsole(vector <Vehicle*> &inventory) override;
     void editDetails() override;
 
     ~Customer();

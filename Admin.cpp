@@ -102,7 +102,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
         system("cls");
         cout << "Adding new vehicle to the inventory" << endl;
 
-        cout << "Choose the vehicle type:" << endl;
+        cout << "Choose the vehicle type to add:" << endl;
         for (int i = 0; i < 3; i++)
         {
             // further addition required here
@@ -181,7 +181,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
 
     for (i = 0; i < inventory.size(); i++)
     {
-        if (cleanString(id) == inventory[i]->getVehicleID()) 
+        if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID())) 
         {
             flag = true;
             break;
@@ -195,7 +195,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
 
         for (i = 0; i < inventory.size(); i++)
         {
-            if (cleanString(id) == inventory[i]->getVehicleID()) 
+            if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID())) 
             {
                 flag = true;
                 break;
@@ -246,7 +246,7 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
         "Add a New Vehicle to the Inventory",
         "Remove a Vehicle from the Inventory",
         "View All Vehicles",
-        "< Navigate Back >"
+        "Sign Out"
     };
 
     int choice = 1, maxChoices = 5;
