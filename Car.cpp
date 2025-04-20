@@ -44,15 +44,27 @@ void Car::addVehicle()
     cout << endl << "Enter the details of the new CAR below" << endl;
     cout << "Enter the brand of the new car: ";
     getline(cin, brand);
+
     cout << "Enter the model of the new car: ";
     getline(cin, model);
+
     cout << "Enter the license plate of the new car: ";
     getline(cin, licensePlate);
-    cout << "Enter the rate per day of the new car: ";
-    cin >> ratePerDay;
+
+    do
+    {
+        cout << "Enter the rate per day of the new car: ";
+        cin >> ratePerDay;
+        if (ratePerDay <= 0)
+        {
+            cout << "Invalid rate! Please enter a positive value." << endl;
+        }
+    } while (ratePerDay <= 0);
     cin.ignore();
+
     cout << "Enter the fuel type of the new car: ";
     getline(cin, fuelType);
+
     isAvailable = true;
     vehicleType = "Car";
 }
