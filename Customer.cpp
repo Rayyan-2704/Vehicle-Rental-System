@@ -67,9 +67,9 @@ void Customer::editDetails()
     char confirmation;
     cout << "Username: " << newName << endl;
     cout << "Email: " << newEmail << endl;
-    cout << "Password: " << userPassword << endl;
-    cout << "Phone Number: " << userPhoneNumber << endl;
-    cout << "Address: " << userAddress << endl;
+    cout << "Password: " << newPass << endl;
+    cout << "Phone Number: " << newPhone << endl;
+    cout << "Address: " << newAddress << endl;
     cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
     cin >> confirmation;
 
@@ -174,8 +174,14 @@ void Customer::rentVehicle(vector <Vehicle*> &inventory)
         }
     }
 
-    cout << "Enter the number of days you would like to rent the vehicle for: ";
-    cin >> numDays;  
+    do {
+        cout << "Enter the number of days you would like to rent the vehicle for: ";
+        cin >> numDays;
+        if (numDays <= 0) 
+        {
+            cout << "Invalid number of days! Please enter a positive value." << endl;
+        }
+    } while (numDays <= 0);
 
     newBooking = new Booking(inventory[i]->getVehicleID(), userID, numDays, inventory[i]->getRatePerDay());
 

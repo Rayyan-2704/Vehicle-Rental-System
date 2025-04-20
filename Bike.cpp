@@ -35,8 +35,12 @@ void Bike::generateVehicleID()
 
 void Bike::displayVehicleDetails(ostream &os) const
 {
-    os << "Vehicle ID: " << vehicleID << " | Brand: " << brand << " | Model: " << model << " | Vehicle Type: " << endl;
-    os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Engine CC: " << engineCC << " CC" <<endl;
+    // os << "Vehicle ID: " << vehicleID << " | Brand: " << brand << " | Model: " << model << " | Vehicle Type: " << vehicleType << endl;
+    // os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Engine CC: " << engineCC << " CC" <<endl;
+    os << "Vehicle ID: " << vehicleID << endl;
+    os << "Brand: " << brand << " | Model: " << model << " | Type: " << vehicleType << endl;
+    os << "Rate: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << endl;
+    os << "Engine CC: " << engineCC <<  " CC" << endl;
 }
 
 void Bike::addVehicle()
@@ -61,8 +65,15 @@ void Bike::addVehicle()
         }
     } while (ratePerDay <= 0);
 
-    cout << "Enter the engine CC of the new bike: ";
-    cin >> engineCC;
+    do 
+    {
+        cout << "Enter the engine CC of the new bike: ";
+        cin >> engineCC;
+        if (engineCC <= 0) 
+        {
+            cout << "Invalid engine CC! Please enter a positive value." << endl;
+        }
+    } while (engineCC <= 0);
     cin.ignore();
 
     isAvailable = true;

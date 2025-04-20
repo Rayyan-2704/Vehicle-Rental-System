@@ -67,9 +67,9 @@ void Admin::editDetails()
     char confirmation;
     cout << "Username: " << newName << endl;
     cout << "Email: " << newEmail << endl;
-    cout << "Password: " << userPassword << endl;
-    cout << "Phone Number: " << userPhoneNumber << endl;
-    cout << "Address: " << userAddress << endl;
+    cout << "Password: " << newPass << endl;
+    cout << "Phone Number: " << newPhone << endl;
+    cout << "Address: " << newAddress << endl;
     cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
     cin >> confirmation;
     cin.ignore();
