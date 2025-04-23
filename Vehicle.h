@@ -9,6 +9,8 @@
 #include <cctype>
 #include <conio.h>
 #include <cstdlib>
+
+#include "TerminalControl.h"
 using namespace std;
 
 class Vehicle

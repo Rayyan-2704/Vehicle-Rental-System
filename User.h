@@ -13,6 +13,7 @@
 #include "Car.h"
 #include "Bike.h"
 #include "Truck.h"
+#include "TerminalControl.h"
 using namespace std;
 
 class User

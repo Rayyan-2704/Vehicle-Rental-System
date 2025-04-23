@@ -35,42 +35,58 @@ void Truck::generateVehicleID()
 
 void Truck::displayVehicleDetails(ostream &os) const
 {
-    // os << "Vehicle ID: " << vehicleID << " | Brand: " << brand << " | Model: " << model << " | Vehicle Type: " << vehicleType << endl;
-    // os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Load Capacity: " << loadCapacity << " kg" << endl;
-    os << "Vehicle ID: " << vehicleID << endl;
-    os << "Brand: " << brand << " | Model: " << model << " | Type: " << vehicleType << endl;
-    os << "Rate: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << endl;
-    os << "Load Capacity: " << loadCapacity << " kg" << endl;
+    // os << "Vehicle ID: " << vehicleID << endl;
+    // os << "Brand: " << brand << " | Model: " << model << " | Type: " << vehicleType << endl;
+    // os << "Rate: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << endl;
+    // os << "Load Capacity: " << loadCapacity << " kg" << endl;
+    printFormattedText("Vehicle ID: " + vehicleID, COLOR_WHITE, false);
+    printFormattedText("Brand: " + brand + " | Model: " + model + " | Type: " + vehicleType, COLOR_WHITE, false);
+    printFormattedText("Rate: $" + to_string(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
+    printFormattedText("Load Capacity: " + to_string(loadCapacity) + " kg" , COLOR_WHITE, false);
+    printLineWithSpaces(COLOR_CYAN);
 }
 
 void Truck::addVehicle()
 {
-    cout << endl << "Enter the details of the new TRUCK below" << endl;
-    cout << "Enter the brand of the new truck: ";
+    // cout << endl << "Enter the details of the new TRUCK below" << endl;
+    printFormattedText("Enter the details of the new TRUCK below", COLOR_WHITE, false);
+    // cout << "Enter the brand of the new truck: ";
+    printFormattedText("Enter the brand of the new truck:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " COLOR_RESET;
     getline(cin, brand);
 
-    cout << "Enter the model of the new truck: ";
+    // cout << "Enter the model of the new truck: ";
+    printFormattedText("Enter the model of the new truck:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " COLOR_RESET;
     getline(cin, model);
 
-    cout << "Enter the license plate of the new truck: ";
+    // cout << "Enter the license plate of the new truck: ";
+    printFormattedText("Enter the license plate of the new truck:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " COLOR_RESET;
     getline(cin, licensePlate);
 
     do
     {
-        cout << "Enter the rate per day of the new truck: ";
+        // cout << "Enter the rate per day of the new truck: ";
+        printFormattedText("Enter the rate per day of the new truck:", COLOR_WHITE, false);
+        cout << COLOR_CYAN << "| >> " COLOR_RESET;
         cin >> ratePerDay;
         if (ratePerDay <= 0)
         {
-            cout << "Invalid rate! Please enter a positive value." << endl;
+            // cout << "Invalid rate! Please enter a positive value." << endl;
+            printFormattedText("Invalid rate! Please enter a positive value.", COLOR_WHITE, false);
         }
     } while (ratePerDay <= 0);
 
     do {
-        cout << "Enter the load capacity (in kg) of the new truck: ";
+        // cout << "Enter the load capacity (in kg) of the new truck: ";
+        printFormattedText("Enter the load capacity (in kg) of the new truck:", COLOR_WHITE, false);
+        cout << COLOR_CYAN << "| >> " COLOR_RESET;
         cin >> loadCapacity;
         if (loadCapacity <= 0) 
         {
-            cout << "Invalid capacity! Please enter a positive value." << endl;
+            // cout << "Invalid capacity! Please enter a positive value." << endl;
+            printFormattedText("Invalid capacity! Please enter a positive value.", COLOR_WHITE, false);
         }
     } while (loadCapacity <= 0);
     cin.ignore();

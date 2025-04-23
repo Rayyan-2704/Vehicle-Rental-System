@@ -10,6 +10,8 @@
 #include <ctime>
 #include <conio.h>
 #include <cstdlib>
+
+#include "TerminalControl.h"
 using namespace std;
 
 class Booking

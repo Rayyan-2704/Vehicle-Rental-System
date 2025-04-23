@@ -35,43 +35,59 @@ void Bike::generateVehicleID()
 
 void Bike::displayVehicleDetails(ostream &os) const
 {
-    // os << "Vehicle ID: " << vehicleID << " | Brand: " << brand << " | Model: " << model << " | Vehicle Type: " << vehicleType << endl;
-    // os << "Rate Per Day: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << " | Engine CC: " << engineCC << " CC" <<endl;
-    os << "Vehicle ID: " << vehicleID << endl;
-    os << "Brand: " << brand << " | Model: " << model << " | Type: " << vehicleType << endl;
-    os << "Rate: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << endl;
-    os << "Engine CC: " << engineCC <<  " CC" << endl;
+    // os << "Vehicle ID: " << vehicleID << endl;
+    // os << "Brand: " << brand << " | Model: " << model << " | Type: " << vehicleType << endl;
+    // os << "Rate: $" << ratePerDay << " | License Plate: " << licensePlate << " | Available: " << ((isAvailable) ? "Yes" : "No") << endl;
+    // os << "Engine CC: " << engineCC <<  " CC" << endl;
+    printFormattedText("Vehicle ID: " + vehicleID, COLOR_WHITE, false);
+    printFormattedText("Brand: " + brand + " | Model: " + model + " | Type: " + vehicleType, COLOR_WHITE, false);
+    printFormattedText("Rate: $" + to_string(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
+    printFormattedText("Engine CC: " + to_string(engineCC) + " CC", COLOR_WHITE, false);
+    printLineWithSpaces(COLOR_CYAN);
 }
 
 void Bike::addVehicle()
 {
-    cout << endl << "Enter the details of the new BIKE below" << endl;
-    cout << "Enter the brand of the new bike: ";
+    // cout << endl << "Enter the details of the new BIKE below" << endl;
+    printFormattedText("Enter the details of the new BIKE below", COLOR_WHITE, false);
+    // cout << "Enter the brand of the new bike: ";
+    printFormattedText("Enter the brand of the new bike:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     getline(cin, brand);
 
-    cout << "Enter the model of the new bike: ";
+    // cout << "Enter the model of the new bike: ";
+    printFormattedText("Enter the model of the new bike:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     getline(cin, model);
 
-    cout << "Enter the license plate of the new bike: ";
+    // cout << "Enter the license plate of the new bike: ";
+    printFormattedText("Enter the license plate of the new bike:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     getline(cin, licensePlate);
 
     do
     {
-        cout << "Enter the rate per day of the new bike: ";
+        // cout << "Enter the rate per day of the new bike: ";
+        printFormattedText("Enter the rate per day of the new bike:", COLOR_WHITE, false);
+        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
         cin >> ratePerDay;
         if (ratePerDay <= 0)
         {
-            cout << "Invalid rate! Please enter a positive value." << endl;
+            // cout << "Invalid rate! Please enter a positive value." << endl;
+            printFormattedText("Invalid rate! Please enter a positive value.", COLOR_WHITE, false);
         }
     } while (ratePerDay <= 0);
 
     do 
     {
-        cout << "Enter the engine CC of the new bike: ";
+        // cout << "Enter the engine CC of the new bike: ";
+        printFormattedText("Enter the engine CC of the new bike:", COLOR_WHITE, false);
+        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
         cin >> engineCC;
         if (engineCC <= 0) 
         {
-            cout << "Invalid engine CC! Please enter a positive value." << endl;
+            // cout << "Invalid engine CC! Please enter a positive value." << endl;
+            printFormattedText("Invalid engine CC! Please enter a positive value.", COLOR_WHITE, false);
         }
     } while (engineCC <= 0);
     cin.ignore();
