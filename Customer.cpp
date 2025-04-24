@@ -16,7 +16,7 @@ Customer::Customer()
     generateUserID();
 }
 
-Customer::Customer(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address)
+Customer::Customer(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address, "Customer")
 {
     customersCount++;
     generateUserID();
@@ -29,6 +29,11 @@ void Customer::generateUserID()
     stringstream ss;
     ss << "UC-" << setw(4) << setfill('0') << customersCount;
     userID = ss.str();
+}
+
+void Customer::addBooking(Booking &b)
+{
+    bookings.push_back(b);
 }
 
 void Customer::editDetails()

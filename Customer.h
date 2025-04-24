@@ -25,6 +25,7 @@ public:
 
     static int getCustomersCount();
     void generateUserID() override;
+    void addBooking(Booking &b);
     void rentVehicle(vector <Vehicle*> &inventory);
     void returnVehicle(vector <Vehicle*> &inventory);
     void viewAllBookings() const ;

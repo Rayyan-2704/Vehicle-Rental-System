@@ -25,12 +25,13 @@ protected:
     string userPassword;
     string userPhoneNumber;
     string userAddress;
+    string userType;
     static int usersCount;
 
 public:
     /* Constructors */
     User();
-    User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
+    User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address, const string &type);
 
     /* User Registration, Profile Management and Utility Methods */
     virtual void registerUser();
@@ -47,6 +48,7 @@ public:
     void setUserPassword(const string &password);
     void setUserPhoneNumber(const string &phoneNumber);
     void setUserAddress(const string &address);
+    void setUserType(const string &type);
 
     /* Getters (Accessors) */
     string getUserID() const;
@@ -54,6 +56,7 @@ public:
     string getUserEmail() const;
     string getUserPhoneNumber() const;
     string getUserAddress() const;
+    string getUserType() const;
     static int getUsersCount();
 
     /* Destructor */

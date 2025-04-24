@@ -16,7 +16,7 @@ Admin::Admin()
     generateUserID();
 }
 
-Admin::Admin(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address)
+Admin::Admin(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address, "Admin")
 {
     adminsCount++;
     generateUserID();

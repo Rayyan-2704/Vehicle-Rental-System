@@ -16,7 +16,7 @@ User::User() : userName(""), userEmail(""), userPassword(""), userPhoneNumber(""
     generateUserID();
 }
 
-User::User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : userName(name), userEmail(email), userPassword(pass), userPhoneNumber(phoneNum), userAddress(address)
+User::User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address, const string &type) : userName(name), userEmail(email), userPassword(pass), userPhoneNumber(phoneNum), userAddress(address), userType(type)
 {
     usersCount++;
     generateUserID();
@@ -72,6 +72,7 @@ void User::setUserEmail(const string &email) { userEmail = email; }
 void User::setUserPassword(const string &password) { userPassword = password; }
 void User::setUserPhoneNumber(const string &phoneNumber) { userPhoneNumber = phoneNumber; }
 void User::setUserAddress(const string &address) { userAddress = address; }
+void User::setUserType(const string &type) { userType = type; }
 
 /* Getters */
 string User::getUserID() const { return userID; }
@@ -79,6 +80,7 @@ string User::getUserName() const { return userName; }
 string User::getUserEmail() const { return userEmail; }
 string User::getUserPhoneNumber() const { return userPhoneNumber; }
 string User::getUserAddress() const { return userAddress; }
+string User::getUserType() const { return userType; }
 int User::getUsersCount() { return usersCount; }
 
 User::~User() { usersCount--; }
