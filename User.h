@@ -39,6 +39,7 @@ public:
     bool verifyLogin(const string &e, const string &p);
     virtual void generateUserID();
     virtual void displayUserInfo() const;
+    virtual void incrementOrDecrementIDCounter(bool isIncrement) = 0;
     virtual void editDetails() = 0;
     virtual void userConsole(vector <Vehicle*> &inventory) = 0;
 

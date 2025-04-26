@@ -14,6 +14,7 @@ using namespace std;
 Booking::Booking() : bookedVehicleID(""), bookedCustomerID(""), rentDuration(0), rentalCost(0.0)
 {
     bookingsCount++;
+    bookingIDCounter++;
     generateBookingID();
     setRentDateToToday();
 }
@@ -21,6 +22,7 @@ Booking::Booking() : bookedVehicleID(""), bookedCustomerID(""), rentDuration(0),
 Booking::Booking(const string &vID, const string &cID, int days, double rentPerDay) : bookedVehicleID(vID), bookedCustomerID(cID), rentDuration(days)
 {
     bookingsCount++;
+    bookingIDCounter++;
     generateBookingID();
     setRentDateToToday();
     rentalCost = rentDuration * rentPerDay;
@@ -29,8 +31,13 @@ Booking::Booking(const string &vID, const string &cID, int days, double rentPerD
 void Booking::generateBookingID()
 {
     stringstream ss;
-    ss << "B-" << setw(4) << setfill('0') << bookingsCount;
+    ss << "B-" << setw(4) << setfill('0') << bookingIDCounter;
     bookingID = ss.str();
+}
+
+void Booking::incrementOrDecrementIDCounter(bool isIncrement)
+{
+    (isIncrement) ? bookingIDCounter++ : bookingIDCounter--;
 }
 
 void Booking::displayBookingDetails() const
@@ -70,3 +77,4 @@ int Booking::getBookingsCount() { return bookingsCount; }
 Booking::~Booking() { bookingsCount--; }
 
 int Booking::bookingsCount = 0;
+int Booking::bookingIDCounter = 0;

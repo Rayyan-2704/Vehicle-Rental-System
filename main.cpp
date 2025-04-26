@@ -15,7 +15,7 @@ using namespace std;
 
 void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vector <Vehicle*> &inventory, const string &userType);
 void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <Vehicle*> &inventory, const string &userType);
-void registerUser(); // remaining
+void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const string &userType);
 
 int main()
 {
@@ -56,13 +56,13 @@ int main()
     };
 
     customers[0]->addBooking(*totalBookings[0]);
-    customers[0]->addBooking(*totalBookings[0]);
-    customers[1]->addBooking(*totalBookings[1]);
-    customers[2]->addBooking(*totalBookings[2]);
+    customers[0]->addBooking(*totalBookings[1]);
+    customers[1]->addBooking(*totalBookings[2]);
+    customers[2]->addBooking(*totalBookings[3]);
 
     string options[3] = {"Admin", "Customer", "Exit Program"};
 
-    int choice = 1, maxChoices = 3;
+    int choice = 0, maxChoices = 2;
     bool exitStatus = false;
     char pressedKey;
     do
@@ -87,11 +87,12 @@ int main()
             }
         }
         printLineWithSpaces(COLOR_CYAN);
-        printFormattedText("Navigate with W/S or ↑ ↓ Arrow Keys", COLOR_WHITE, false);
+        printFormattedText("Navigate with W/S or Arrow Keys", COLOR_WHITE, false);
         printLineWithDashes(COLOR_CYAN);
 
+        maskCursor();
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 0))
         {
             choice--;
         }
@@ -103,37 +104,51 @@ int main()
         {
             switch (choice)
             {
-            case 1:
+            case 0:
                 registerOrLogin(admins, customers, vehicles, "Admin");
                 break;
 
-            case 2:
+            case 1:
                 registerOrLogin(admins, customers, vehicles, "Customer");
                 break;
 
-            case 3:
+            case 2:
                 exitStatus = true;
                 break;
             }
         }     
     } while (!exitStatus);
     
-    std :: cout << COLOR_MAGENTA << "Exiting the program..." << COLOR_RESET;
+    std :: cout << COLOR_GREEN << "Exiting the program..." << COLOR_RESET;
+
+
+    for (Vehicle* v : vehicles)
+    delete v;
+
+    for (Customer* c : customers)
+    delete c;
+
+    for (Admin* a : admins)
+    delete a;
+
+    for (Booking* b : totalBookings)
+    delete b;
+    
     return 0;
 }
 
 void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vector <Vehicle*> &inventory, const string &userType)
 {
-    string options[3] = {"Create New Account", "Sign In", "< Navigate Back >"};
+    string options[3] = {"Create New Account", "Sign In", "Navigate Back"};
 
-    int choice = 1, maxChoices = 3;
+    int choice = 0, maxChoices = 2;
     bool exitStatus = false;
     char pressedKey;
 
     do
     {
         system("cls");
-
+        printProjectTitle();
         printLineWithDashes(COLOR_CYAN);
         printFormattedText("Select And Proceed", COLOR_BLUE, true);
         printLineWithDashes(COLOR_CYAN);
@@ -153,7 +168,7 @@ void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vec
         printLineWithDashes(COLOR_CYAN);
 
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 0))
         {
             choice--;
         }
@@ -165,29 +180,15 @@ void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vec
         {
             switch (choice)
             {
+            case 0:
+                registerUser(admins, customers, userType);
+                break;
+
             case 1:
-                if(userType == "Admin")
-                {
-                    //
-                }
-                else
-                { 
-                    //
-                }
+                loginUser(admins, customers, inventory, userType);
                 break;
 
             case 2:
-                if(userType == "Admin")
-                {
-                    //
-                }
-                else
-                { 
-                    //
-                }
-                break;
-
-            case 3:
                 exitStatus = true;
                 break;
             }
@@ -217,7 +218,7 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
     }
 
     system("cls");
-    printLineWithDashes("COLOR_CYAN");
+    printLineWithDashes(COLOR_CYAN);
     printFormattedText((string)((userType == "Admin") ? "Admin" : "Customer") + " Login", COLOR_BLUE, true);
     printLineWithDashes(COLOR_CYAN);
 
@@ -231,7 +232,8 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
         printLineWithSpaces(COLOR_CYAN);
         printFormattedText("Enter Password:", COLOR_WHITE, false);
         cout << COLOR_CYAN << "| >> " << COLOR_RESET;
-        getline(cin, enteredPass);
+        enteredPass = maskedPassword();
+        cout << endl;
 
         for(int i = 0; i < users.size(); i++)
         {
@@ -255,4 +257,39 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
             system("pause");
         }
     } while (!flag);
+}
+
+void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const string &userType)
+{
+    User *newUser;
+    
+    system("cls");
+    printLineWithDashes(COLOR_CYAN);
+    printFormattedText((string)((userType == "Admin") ? "Admin" : "Customer") + " Registration Form", COLOR_BLUE, true);
+    printLineWithDashes(COLOR_CYAN);
+
+    printLineWithDashes(COLOR_CYAN);
+    if(userType == "Admin")
+    {
+        newUser = new Admin();
+    }
+    else
+    {
+        newUser = new Customer();
+    }
+
+    newUser->registerUser();
+    if(userType == "Admin")
+    {
+        admins.push_back(static_cast <Admin*> (newUser));
+    }
+    else
+    {
+        customers.push_back(static_cast <Customer*> (newUser));
+    }
+
+    printLineWithDashes(COLOR_CYAN);
+    printFormattedText("Registration Successful!", COLOR_GREEN, true);
+    printLineWithDashes(COLOR_CYAN);
+    system("pause");
 }

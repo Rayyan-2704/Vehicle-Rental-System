@@ -1,5 +1,5 @@
 #ifndef VEHICLE_H
-#define VEHICLE_h
+#define VEHICLE_H
 
 #include <iostream>
 #include <string>
@@ -31,6 +31,7 @@ public:
 
     /* Vehicle Utility Methods */
     virtual void generateVehicleID();
+    virtual void incrementOrDecrementIDCounter(bool isIncrement) = 0;
     virtual void displayVehicleDetails(ostream &os) const = 0;
     virtual void addVehicle() = 0;
 

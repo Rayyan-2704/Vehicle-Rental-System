@@ -17,6 +17,7 @@ class Car : public Vehicle
 {
     string fuelType;
     static int carsCount;
+    static int carIDCounter;
 
 public:
     Car();
@@ -27,6 +28,7 @@ public:
     static int getCarsCount();
     
     void generateVehicleID() override;
+    void incrementOrDecrementIDCounter(bool isIncrement) override;
     void displayVehicleDetails(ostream &os) const override;
     void addVehicle() override;
 

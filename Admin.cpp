@@ -13,12 +13,14 @@ using namespace std;
 Admin::Admin()
 {
     adminsCount++;
+    adminIDCounter++;
     generateUserID();
 }
 
 Admin::Admin(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address, "Admin")
 {
     adminsCount++;
+    adminIDCounter++;
     generateUserID();
 }
 
@@ -27,8 +29,13 @@ int Admin::getAdminsCount() { return adminsCount; }
 void Admin::generateUserID()
 {
     stringstream ss;
-    ss << "UA-" << setw(4) << setfill('0') << adminsCount;
+    ss << "UA-" << setw(4) << setfill('0') << adminIDCounter;
     userID = ss.str();
+}
+
+void Admin::incrementOrDecrementIDCounter(bool isIncrement)
+{
+    (isIncrement) ? adminIDCounter++ : adminIDCounter--;
 }
 
 void Admin::editDetails()
@@ -70,6 +77,7 @@ void Admin::editDetails()
     printFormattedText("Enter new password: ", COLOR_WHITE, false);
     cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     newPass = maskedPassword();
+    cout << endl;
 
     printLineWithSpaces(COLOR_CYAN);
     // cout << "Current phone number: " << userPhoneNumber << endl;
@@ -95,11 +103,11 @@ void Admin::editDetails()
     // cout << "Password: " << newPass << endl;
     // cout << "Phone Number: " << newPhone << endl;
     // cout << "Address: " << newAddress << endl;
-    printFormattedText("Username: " + userName, COLOR_WHITE, false);
-    printFormattedText("Email: " + userEmail, COLOR_WHITE, false);
-    printFormattedText("Password: " + string(userPassword.length(), '*'), COLOR_WHITE, false);
-    printFormattedText("Phone Number: " + userPhoneNumber, COLOR_WHITE, false);
-    printFormattedText("Address: " + userAddress, COLOR_WHITE, false);
+    printFormattedText("Username: " + newName, COLOR_WHITE, false);
+    printFormattedText("Email: " + newEmail, COLOR_WHITE, false);
+    printFormattedText("Password: " + string(newPass.length(), '*'), COLOR_WHITE, false);
+    printFormattedText("Phone Number: " + newPhone, COLOR_WHITE, false);
+    printFormattedText("Address: " + newAddress, COLOR_WHITE, false);
     // cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
     printFormattedText("Please confirm your updated details. Would you like to save your changes? (Y/N): ", COLOR_WHITE, false);
     cout << COLOR_CYAN << "| >> " << COLOR_RESET;
@@ -111,18 +119,20 @@ void Admin::editDetails()
     {
         updateUserProfile(newName, newEmail, newPass, newPhone, newAddress);
         // cout << "User profile updated successfully!" << endl;
-        printFormattedText("Admin profile details updated successfully!", COLOR_GREEN, false);    
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Admin profile details updated successfully!", COLOR_GREEN, true);    
     }
     else
     {
         // cout << "Discarding the changes made." << endl;
-        printFormattedText("Discarding the changes made.", COLOR_RED, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Discarding the changes made.", COLOR_RED, true);
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
@@ -130,7 +140,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
     Vehicle *newVehicle;
     string options[3] = {"Car", "Bike", "Truck"};
 
-    int choice = 1, maxChoices = 3;
+    int choice = 0, maxChoices = 2;
     bool optionChosen = false;
     char pressedKey, confirmation;
 
@@ -160,7 +170,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
         printLineWithDashes(COLOR_CYAN);
 
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W'|| pressedKey == 72) && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W'|| pressedKey == 72) && (choice > 0))
         {
             choice--;
         }
@@ -172,17 +182,17 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
         {
             switch (choice)
             {
-            case 1:
+            case 0:
                 newVehicle = new Car();
                 optionChosen = true;
                 break;
 
-            case 2:
+            case 1:
                 newVehicle = new Bike();
                 optionChosen = true;
                 break;
 
-            case 3:
+            case 2:
                 newVehicle = new Truck();
                 optionChosen = true;
                 break;
@@ -203,19 +213,22 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
     {
         inventory.push_back(newVehicle);
         // cout << "New vehicle (" << newVehicle->getVehicleID() << ") has been added to the inventory successfully!" << endl;
-        printFormattedText("New vehicle (" + newVehicle->getVehicleID() + ") has been added to the inventory successfully!", COLOR_GREEN, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("New vehicle (" + newVehicle->getVehicleID() + ") has been added to the inventory successfully!", COLOR_GREEN, true);
     }
     else
     {
+        newVehicle->incrementOrDecrementIDCounter(false);
         delete newVehicle;
         // cout << "Discarding the changes made." << endl;
-        printFormattedText("Discarding the changes made.", COLOR_RED, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Discarding the changes made.", COLOR_RED, true);
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
@@ -282,18 +295,20 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
         delete inventory[i];
         inventory.erase(inventory.begin() + i);
         // cout << "Vehicle (" << id << ") has been removed from the inventory successfully!" << endl;
-        printFormattedText("Vehicle (" + id + ") has been removed from the inventory successfully!", COLOR_GREEN, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Vehicle (" + id + ") has been removed from the inventory successfully!", COLOR_GREEN, true);
     }
     else
     {
         // cout << "Discarding the changes made." << endl;
-        printFormattedText("Discarding the changes made.", COLOR_RED, false);   
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Discarding the changes made.", COLOR_RED, true);   
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Admin::viewAllVehicles(const vector <Vehicle*> &inventory)
@@ -315,16 +330,16 @@ void Admin::viewAllVehicles(const vector <Vehicle*> &inventory)
     // cout << "Total number of cars in the inventory: " << Car::getCarsCount() << endl;
     // cout << "Total number of bikes in the inventory: " << Bike::getBikesCount() << endl;
     // cout << "Total number of trucks in the inventory: " << Truck::getTrucksCount() << endl;
-    printFormattedText("Total number of vehicles in the inventory: " + Vehicle::getVehiclesCount(), COLOR_WHITE, false);
-    printFormattedText("Total number of cars in the inventory: " + Car::getCarsCount(), COLOR_WHITE, false);
-    printFormattedText("Total number of bikes in the inventory: " + Bike::getBikesCount(), COLOR_WHITE, false);
-    printFormattedText("Total number of trucks in the inventory: " + Truck::getTrucksCount(), COLOR_WHITE, false);
+    printFormattedText("Total number of vehicles in the inventory: " + to_string(Vehicle::getVehiclesCount()), COLOR_WHITE, false);
+    printFormattedText("Total number of cars in the inventory: " + to_string(Car::getCarsCount()), COLOR_WHITE, false);
+    printFormattedText("Total number of bikes in the inventory: " + to_string(Bike::getBikesCount()), COLOR_WHITE, false);
+    printFormattedText("Total number of trucks in the inventory: " + to_string(Truck::getTrucksCount()), COLOR_WHITE, false);
 
     printLineWithSpaces(COLOR_CYAN);
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Admin::userConsole(vector <Vehicle*> &inventory)
@@ -337,7 +352,7 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
         "Sign Out"
     };
 
-    int choice = 1, maxChoices = 5;
+    int choice = 0, maxChoices = 4;
     bool exitStatus = false;
     char pressedKey;
 
@@ -371,7 +386,7 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
         printLineWithDashes(COLOR_CYAN);
 
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 0))
         {
             choice--;
         }
@@ -383,23 +398,23 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
         {
             switch (choice)
             {
-            case 1:
+            case 0:
                 editDetails();
                 break;
 
-            case 2:
+            case 1:
                 addVehicleToInventory(inventory);
                 break;
 
-            case 3:
+            case 2:
                 removeVehicleFromInventory(inventory);
                 break;
 
-            case 4:
+            case 3:
                 viewAllVehicles(inventory);
                 break;
 
-            case 5:
+            case 4:
                 exitStatus = true;
                 break;
             }
@@ -410,3 +425,4 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
 Admin::~Admin() { adminsCount--; }
 
 int Admin::adminsCount = 0;
+int Admin::adminIDCounter = 0;

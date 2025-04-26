@@ -23,6 +23,7 @@ class Booking
     int rentDuration;
     double rentalCost;
     static int bookingsCount;
+    static int bookingIDCounter;
 
 public:
     /* Constructors */
@@ -31,6 +32,7 @@ public:
 
     /* Utility Methods */
     void generateBookingID();
+    void incrementOrDecrementIDCounter(bool isIncrement);
     void displayBookingDetails() const;
 
     /* Setters */

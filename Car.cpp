@@ -13,12 +13,14 @@ using namespace std;
 Car::Car() : fuelType("") 
 {
     carsCount++;
+    carIDCounter++;
     generateVehicleID();
 }
 
 Car::Car(const string &b, const string &m, const string &l, double rate, bool available, const string &f) : Vehicle(b, m, l, rate, available, "Car"), fuelType(f) 
 {
     carsCount++;
+    carIDCounter++;
     generateVehicleID();
 }
 
@@ -29,8 +31,13 @@ int Car::getCarsCount() { return carsCount; }
 void Car::generateVehicleID()
 {
     stringstream ss;
-    ss << "VC-" << setw(4) << setfill('0') << carsCount;
+    ss << "VC-" << setw(4) << setfill('0') << carIDCounter;
     vehicleID = ss.str();
+}
+
+void Car::incrementOrDecrementIDCounter(bool isIncrement)
+{
+    (isIncrement) ? carIDCounter++ : carIDCounter--;
 }
 
 void Car::displayVehicleDetails(ostream &os) const
@@ -91,3 +98,4 @@ void Car::addVehicle()
 Car::~Car() { carsCount--; }
 
 int Car::carsCount = 0;
+int Car::carIDCounter = 0;

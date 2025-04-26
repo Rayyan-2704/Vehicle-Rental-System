@@ -13,12 +13,14 @@ using namespace std;
 Customer::Customer()
 {
     customersCount++;
+    customerIDCounter++;
     generateUserID();
 }
 
 Customer::Customer(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address) : User(name, email, pass, phoneNum, address, "Customer")
 {
     customersCount++;
+    customerIDCounter++;
     generateUserID();
 }
 
@@ -27,13 +29,22 @@ int Customer::getCustomersCount() { return customersCount; }
 void Customer::generateUserID()
 {
     stringstream ss;
-    ss << "UC-" << setw(4) << setfill('0') << customersCount;
+    ss << "UC-" << setw(4) << setfill('0') << customerIDCounter;
     userID = ss.str();
+}
+
+void Customer::incrementOrDecrementIDCounter(bool isIncrement)
+{
+    (isIncrement) ? customerIDCounter++ : customerIDCounter--;
 }
 
 void Customer::addBooking(Booking &b)
 {
     bookings.push_back(b);
+}
+
+const vector<Booking>& Customer::getBookingVector() const {
+    return bookings;
 }
 
 void Customer::editDetails()
@@ -75,6 +86,7 @@ void Customer::editDetails()
     printFormattedText("Enter new password: ", COLOR_WHITE, false);
     cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     newPass = maskedPassword();
+    cout << endl;
 
     printLineWithSpaces(COLOR_CYAN);
     // cout << "Current phone number: " << userPhoneNumber << endl;
@@ -100,11 +112,11 @@ void Customer::editDetails()
     // cout << "Password: " << newPass << endl;
     // cout << "Phone Number: " << newPhone << endl;
     // cout << "Address: " << newAddress << endl;
-    printFormattedText("Username: " + userName, COLOR_WHITE, false);
-    printFormattedText("Email: " + userEmail, COLOR_WHITE, false);
-    printFormattedText("Password: " + string(userPassword.length(), '*'), COLOR_WHITE, false);
-    printFormattedText("Phone Number: " + userPhoneNumber, COLOR_WHITE, false);
-    printFormattedText("Address: " + userAddress, COLOR_WHITE, false);
+    printFormattedText("Username: " + newName, COLOR_WHITE, false);
+    printFormattedText("Email: " + newEmail, COLOR_WHITE, false);
+    printFormattedText("Password: " + string(newPass.length(), '*'), COLOR_WHITE, false);
+    printFormattedText("Phone Number: " + newPhone, COLOR_WHITE, false);
+    printFormattedText("Address: " + newAddress, COLOR_WHITE, false);
     // cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
     printFormattedText("Please confirm your updated details. Would you like to save your changes? (Y/N): ", COLOR_WHITE, false);
     cout << COLOR_CYAN << "| >> " << COLOR_RESET;
@@ -116,18 +128,20 @@ void Customer::editDetails()
     {
         updateUserProfile(newName, newEmail, newPass, newPhone, newAddress);
         // cout << "User profile updated successfully!" << endl;
-        printFormattedText("Customer profile details updated successfully!", COLOR_GREEN, false);    
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Customer profile details updated successfully!", COLOR_GREEN, true);    
     }
     else
     {
         // cout << "Discarding the changes made." << endl;
-        printFormattedText("Discarding the changes made.", COLOR_RED, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Discarding the changes made.", COLOR_RED, true);
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Customer::rentVehicle(vector <Vehicle*> &inventory)
@@ -135,7 +149,7 @@ void Customer::rentVehicle(vector <Vehicle*> &inventory)
     Booking *newBooking;
     string options[3] = {"Car", "Bike", "Truck"};
     int i, numDays;
-    int choice = 1, maxChoices = 3;
+    int choice = 0, maxChoices = 2;
     bool optionChosen = false, flag = false;
     char pressedKey, confirmation;
     string vehicleTypeChosen, id;
@@ -166,7 +180,7 @@ void Customer::rentVehicle(vector <Vehicle*> &inventory)
         printLineWithDashes(COLOR_CYAN);
 
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W'|| pressedKey == 72) && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W'|| pressedKey == 72) && (choice > 0))
         {
             choice--;
         }
@@ -178,17 +192,17 @@ void Customer::rentVehicle(vector <Vehicle*> &inventory)
         {
             switch (choice)
             {
-            case 1:
+            case 0:
                 vehicleTypeChosen = "Car";
                 optionChosen = true;
                 break;
 
-            case 2:
+            case 1:
                 vehicleTypeChosen = "Bike";
                 optionChosen = true;
                 break;
 
-            case 3:
+            case 2:
                 vehicleTypeChosen = "Truck";
                 optionChosen = true;
                 break;
@@ -262,19 +276,22 @@ void Customer::rentVehicle(vector <Vehicle*> &inventory)
         bookings.push_back(*newBooking);
         inventory[i]->setAvailability(false);
         // cout << "Vehicle (" << id << ") has been rented successfully!" << endl;
-        printFormattedText("Vehicle (" + id + ") has been rented successfully!", COLOR_GREEN, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Vehicle (" + id + ") has been rented successfully!", COLOR_GREEN, true);
     }
     else
     {
+        newBooking->incrementOrDecrementIDCounter(false);
         delete newBooking;
         // cout << "Discarding the changes made." << endl;
-        printFormattedText("Discarding the changes made.", COLOR_RED, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Discarding the changes made.", COLOR_RED, true);
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Customer::returnVehicle(vector <Vehicle*> &inventory)
@@ -293,13 +310,13 @@ void Customer::returnVehicle(vector <Vehicle*> &inventory)
 
     printLineWithDashes(COLOR_CYAN);
     // cout << "Enter the vehicle ID of the rented vehicle you want to return: " << endl;
-    printFormattedText("Enter the vehicle ID of the rented vehicle you want to return:", COLOR_WHITE, false);
+    printFormattedText("Enter the vehicle ID of your rented vehicle to be returned:", COLOR_WHITE, false);
     cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     getline(cin, id);
 
-    for (i = 0; i < inventory.size(); i++)
+    for (i = 0; i < bookings.size(); i++)
     {
-        if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID())) 
+        if (lowercaseString(id) == lowercaseString(bookings[i].getBookedVehicleID())) 
         {
             flag = true;
             break;
@@ -308,14 +325,14 @@ void Customer::returnVehicle(vector <Vehicle*> &inventory)
 
     while (!flag)
     {
-        // cout << endl << "Invalid vehicle ID!" << endl << "Enter the valid vehicle ID of the rented vehicle you want to return: ";
-        printFormattedText("Invalid vehicle ID! Enter the valid vehicle ID of the rented vehicle you want to return:", COLOR_WHITE, false);
+        // cout << endl << "Invalid vehicle ID!" << endl << "Enter the valid vehicle ID of the rented vehicle to return: ";
+        printFormattedText("Invalid vehicle ID! Enter the valid vehicle ID of your rented vehicle to be returned:", COLOR_WHITE, false);
         cout << COLOR_CYAN << "| >> " << COLOR_RESET;
         getline(cin, id);
 
-        for (i = 0; i < inventory.size(); i++)
+        for (i = 0; i < bookings.size(); i++)
         {
-            if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID())) 
+            if (lowercaseString(id) == lowercaseString(bookings[i].getBookedVehicleID())) 
             {
                 flag = true;
                 break;
@@ -336,7 +353,14 @@ void Customer::returnVehicle(vector <Vehicle*> &inventory)
         {
             if(lowercaseString(bookings[j].getBookedVehicleID()) == lowercaseString(id) && bookings[j].getBookedCustomerID() == userID)
             {
-                inventory[i]->setAvailability(true);
+                for (auto &veh : inventory)
+                {
+                    if (lowercaseString(veh->getVehicleID()) == lowercaseString(id))
+                    {
+                        veh->setAvailability(true);
+                        break;
+                    }
+                }
                 payment = bookings[j].getRentalCost();
                 bookings.erase(bookings.begin() + j);
                 break;
@@ -344,19 +368,21 @@ void Customer::returnVehicle(vector <Vehicle*> &inventory)
         }
         // cout << "Vehicle (" << id << ") has been returned successfully!" << endl;
         // cout << "Your total rental cost amounts to $" << payment << endl;
-        printFormattedText("Vehicle (" + id + ") has been returned successfully!", COLOR_GREEN, false);
-        printFormattedText("Your total rental cost amounts to $" + to_string(payment), COLOR_WHITE, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Vehicle (" + id + ") has been returned successfully!", COLOR_GREEN, true);
+        printFormattedText("Your total rental cost amounts to $" + to_string(payment), COLOR_WHITE, true);
     }
     else
     {
         // cout << "Discarding the changes made." << endl;
-        printFormattedText("Discarding the changes made.", COLOR_RED, false);
+        printLineWithDashes(COLOR_CYAN);
+        printFormattedText("Discarding the changes made.", COLOR_RED, true);
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Customer::viewAllBookings() const
@@ -378,9 +404,9 @@ void Customer::viewAllBookings() const
 
     printLineWithSpaces(COLOR_CYAN);
     // cout << "Press any key to return to the main menu..." << endl;
-    printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
+    // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
     printLineWithDashes(COLOR_CYAN);
-    _getch();
+    system("pause");
 }
 
 void Customer::userConsole(vector <Vehicle*> &inventory)
@@ -393,7 +419,7 @@ void Customer::userConsole(vector <Vehicle*> &inventory)
         "Sign Out"
     };
 
-    int choice = 1, maxChoices = 5;
+    int choice = 0, maxChoices = 4;
     bool exitStatus = false;
     char pressedKey;
 
@@ -427,7 +453,7 @@ void Customer::userConsole(vector <Vehicle*> &inventory)
         printLineWithDashes(COLOR_CYAN);
 
         pressedKey = _getch();
-        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 1))
+        if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 0))
         {
             choice--;
         }
@@ -439,23 +465,23 @@ void Customer::userConsole(vector <Vehicle*> &inventory)
         {
             switch (choice)
             {
-            case 1:
+            case 0:
                 editDetails();
                 break;
 
-            case 2:
+            case 1:
                 rentVehicle(inventory);
                 break;
 
-            case 3:
+            case 2:
                 returnVehicle(inventory);
                 break;
 
-            case 4:
+            case 3:
                 viewAllBookings();
                 break;
 
-            case 5:
+            case 4:
                 exitStatus = true;
                 break;
             }
@@ -466,3 +492,4 @@ void Customer::userConsole(vector <Vehicle*> &inventory)
 Customer::~Customer() { customersCount--; }
 
 int Customer::customersCount = 0;
+int Customer::customerIDCounter = 0;

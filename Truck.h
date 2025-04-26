@@ -17,6 +17,7 @@ class Truck : public Vehicle
 {
     double loadCapacity;
     static int trucksCount;
+    static int truckIDCounter;
 
 public:
     Truck();
@@ -27,6 +28,7 @@ public:
     static int getTrucksCount();
 
     void generateVehicleID() override;
+    void incrementOrDecrementIDCounter(bool isIncrement) override;
     void displayVehicleDetails(ostream &os) const override;
     void addVehicle() override;
 

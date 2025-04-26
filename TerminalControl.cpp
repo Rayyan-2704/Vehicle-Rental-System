@@ -9,7 +9,7 @@ using namespace std;
 
 void printProjectTitle()
 {
-    cout << "\n"
+    cout << COLOR_MAGENTA << "\n"
          << "\t\t\t\t __      __  _     _      _        _____            _        _    _____           _                 \n"
          << "\t\t\t\t \\ \\    / / | |   (_)    | |      |  __ \\          | |      | |  / ____|         | |                \n"
          << "\t\t\t\t  \\ \\  / /__| |__  _  ___| | ___  | |__) |___ _ __ | |_ __ _| | | (___  _   _ ___| |_ ___ _ __ ___  \n"
@@ -18,7 +18,7 @@ void printProjectTitle()
          << "\t\t\t\t     \\/ \\___|_| |_|_|\\___|_|\\___| |_|  \\_\\___|_| |_|\\__\\__,_|_| |_____/ \\__, |___/\\__\\___|_| |_| |_|\n"
          << "\t\t\t\t                                                                         __/ |                      \n"
          << "\t\t\t\t                                                                        |___/                       \n"
-         << "\n";
+         << "\n" << COLOR_RESET;
 }
 
 ostream &printFormattedText(const string &text, const string &color, bool isCenter)
@@ -40,7 +40,7 @@ ostream &printLineWithDashes(const string &color)
 
 ostream &printLineWithSpaces(const string &color)
 {
-    cout << color << "+" << string(getScreenWidth(), ' ') << "+" << COLOR_RESET << endl;
+    cout << color << "|" << string(getScreenWidth(), ' ') << "|" << COLOR_RESET << endl;
     return cout;
 }
 
@@ -48,7 +48,7 @@ int getScreenWidth()
 {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-    return csbi.srWindow.Right - csbi.srWindow.Left + 1; // Returns the width of the console terminal
+    return csbi.srWindow.Right - csbi.srWindow.Left - 2; // Returns the width of the console terminal
 }
 
 void maskCursor()

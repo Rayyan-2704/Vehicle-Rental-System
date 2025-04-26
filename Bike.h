@@ -17,6 +17,7 @@ class Bike : public Vehicle
 {
     int engineCC;
     static int bikesCount;
+    static int bikeIDCounter;
 
 public:
     Bike();
@@ -27,6 +28,7 @@ public:
     static int getBikesCount();
     
     void generateVehicleID() override;
+    void incrementOrDecrementIDCounter(bool isIncrement) override;
     void displayVehicleDetails(ostream &os) const override;
     void addVehicle() override;
 

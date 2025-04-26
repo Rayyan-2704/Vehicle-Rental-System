@@ -13,12 +13,14 @@ using namespace std;
 Bike::Bike() : engineCC(0)
 {
     bikesCount++;
+    bikeIDCounter++;
     generateVehicleID();
 }
 
 Bike::Bike(const string &b, const string &m, const string &l, double rate, bool available, int cc) : Vehicle(b, m, l, rate, available, "Bike"), engineCC(cc)
 {
     bikesCount++;
+    bikeIDCounter++;    
     generateVehicleID();
 }
 
@@ -29,8 +31,13 @@ int Bike::getBikesCount() { return bikesCount; }
 void Bike::generateVehicleID()
 {
     stringstream ss;
-    ss << "VB-" << setw(4) << setfill('0') << bikesCount;
+    ss << "VB-" << setw(4) << setfill('0') << bikeIDCounter;
     vehicleID = ss.str();
+}
+
+void Bike::incrementOrDecrementIDCounter(bool isIncrement)
+{
+    (isIncrement) ? bikeIDCounter++ : bikeIDCounter --;
 }
 
 void Bike::displayVehicleDetails(ostream &os) const
@@ -99,3 +106,4 @@ void Bike::addVehicle()
 Bike::~Bike() { bikesCount--; }
 
 int Bike::bikesCount = 0;
+int Bike::bikeIDCounter = 0;

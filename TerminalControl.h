@@ -1,5 +1,5 @@
 #ifndef TERMINALCONTROL_H
-#define TERMINALCONTROL_h
+#define TERMINALCONTROL_H
 
 #include <iostream>
 using namespace std;

@@ -16,6 +16,7 @@ using namespace std;
 class Admin : public User
 {
     static int adminsCount;
+    static int adminIDCounter;
 
 public:
     Admin();
@@ -23,6 +24,7 @@ public:
 
     static int getAdminsCount();
     void generateUserID() override;
+    void incrementOrDecrementIDCounter(bool isIncrement) override;
     void addVehicleToInventory(vector <Vehicle*> &inventory);
     void removeVehicleFromInventory(vector <Vehicle*> &inventory);
     void viewAllVehicles(const vector <Vehicle*> &inventory);

@@ -24,15 +24,61 @@ User::User(const string &name, const string &email, const string &pass, const st
 
 void User::registerUser()
 {
-    cout << "Enter Full Name: ";
+    // cout << "Enter Full Name: ";
+    // getline(cin, userName);
+    // cout << "Enter Email: ";
+    // getline(cin, userEmail);
+    // cout << "Enter Password: ";
+    // userPassword = maskedPassword();
+    // cout << "Enter Phone Number: ";
+    // getline(cin, userPhoneNumber);
+    // cout << "Enter Address: ";
+    // getline(cin, userAddress);
+
+    printFormattedText("Enter the full name of the user:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     getline(cin, userName);
-    cout << "Enter Email: ";
-    getline(cin, userEmail);
-    cout << "Enter Password: ";
-    userPassword = maskedPassword();
-    cout << "Enter Phone Number: ";
+
+    printLineWithSpaces(COLOR_CYAN);
+    do
+    {
+        printFormattedText("Enter the email of the user:", COLOR_WHITE, false);
+        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        getline(cin, userEmail);
+        if(!isEmailValid(userEmail))
+        {
+            printFormattedText("Invalid email! Try again.", COLOR_WHITE, false);
+        }
+    } while (!isEmailValid(userEmail));
+    
+    string repeatedPassword;
+    printLineWithSpaces(COLOR_CYAN);
+    do
+    {
+        printFormattedText("Enter the password of the user:", COLOR_WHITE, false);
+        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        userPassword = maskedPassword();
+        cout << endl;
+
+        printFormattedText("Enter password again for confirmation:", COLOR_WHITE, false);
+        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        repeatedPassword = maskedPassword();
+        cout << endl;
+
+        if(repeatedPassword != userPassword)
+        {
+            printFormattedText("Passwords do not match. Try again!", COLOR_WHITE, false);
+        }
+    } while (repeatedPassword != userPassword);
+
+    printLineWithSpaces(COLOR_CYAN);
+    printFormattedText("Enter the phone number of the user:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     getline(cin, userPhoneNumber);
-    cout << "Enter Address: ";
+
+    printLineWithSpaces(COLOR_CYAN);
+    printFormattedText("Enter the address of the user:", COLOR_WHITE, false);
+    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
     getline(cin, userAddress);
 }
 

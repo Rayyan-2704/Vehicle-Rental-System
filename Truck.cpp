@@ -13,12 +13,14 @@ using namespace std;
 Truck::Truck() : loadCapacity(0.0)
 {
     trucksCount++;
+    truckIDCounter++;
     generateVehicleID();
 }
 
 Truck::Truck(const string &b, const string &m, const string &l, double rate, bool available, double lC) : Vehicle(b, m, l, rate, available, "Truck"), loadCapacity(lC)
 {
     trucksCount++;
+    truckIDCounter++;
     generateVehicleID();
 }
 
@@ -29,8 +31,13 @@ int Truck::getTrucksCount() { return trucksCount; }
 void Truck::generateVehicleID()
 {
     stringstream ss;
-    ss << "VT-" << setw(4) << setfill('0') << trucksCount;
+    ss << "VT-" << setw(4) << setfill('0') << truckIDCounter;
     vehicleID = ss.str();
+}
+
+void Truck::incrementOrDecrementIDCounter(bool isIncrement)
+{
+    (isIncrement) ? truckIDCounter++ : truckIDCounter--;
 }
 
 void Truck::displayVehicleDetails(ostream &os) const
@@ -99,3 +106,4 @@ void Truck::addVehicle()
 Truck::~Truck() { trucksCount--; }
 
 int Truck::trucksCount = 0;
+int Truck::truckIDCounter = 0;
