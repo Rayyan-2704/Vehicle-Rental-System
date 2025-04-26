@@ -123,16 +123,16 @@ int main()
 
 
     for (Vehicle* v : vehicles)
-    delete v;
+        delete v;
 
     for (Customer* c : customers)
-    delete c;
+        delete c;
 
     for (Admin* a : admins)
-    delete a;
+        delete a;
 
     for (Booking* b : totalBookings)
-    delete b;
+        delete b;
     
     return 0;
 }
