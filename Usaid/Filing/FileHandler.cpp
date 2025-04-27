@@ -1,143 +1,126 @@
 #include "FileHandler.h"
-#include <sys/stat.h>
-#include <ctime>
-#include <iomanip>
-#include <sstream>
+#include <string>
 
-using namespace std;
-
-bool FileHandler::fileExists(const string& filename) {
-    struct stat buffer;
-    return (stat(filename.c_str(), &buffer) == 0);
+// Admin file operations
+void FileHandler::saveAdmins(const vector<Admin>& admins) {
+    ofstream outFile("admins.dat", ios::binary);
+    if (!outFile) {
+        cerr << "Error opening file for writing admins!" << endl;
+        return;
+    }
+    
+    for (const Admin& admin : admins) {
+        outFile.write(reinterpret_cast<const char*>(&admin), sizeof(Admin));
+    }
+    outFile.close();
 }
 
-bool FileHandler::createFile(const string& filename) {
-    ofstream file(filename);
-    if (!file.is_open()) {
-        cerr << "Error creating file: " << filename << endl;
-        return false;
+vector<Admin> FileHandler::loadAdmins() {
+    vector<Admin> admins;
+    ifstream inFile("admins.dat", ios::binary);
+    
+    if (!inFile) {
+        cerr << "No existing admin file found. Creating new one." << endl;
+        return admins;
     }
-    file.close();
-    return true;
+    
+    Admin admin;
+    while (inFile.read(reinterpret_cast<char*>(&admin), sizeof(Admin))) {
+        admins.push_back(admin);
+    }
+    inFile.close();
+    return admins;
 }
 
-vector<string> FileHandler::readAllLines(const string& filename) {
-    vector<string> lines;
-    ifstream file(filename);
-    
-    if (!file.is_open()) {
-        cerr << "Error opening file for reading: " << filename << endl;
-        return lines;
+// Customer file operations
+void FileHandler::saveCustomers(const vector<Customer>& customers) {
+    ofstream outFile("customers.dat", ios::binary);
+    if (!outFile) {
+        cerr << "Error opening file for writing customers!" << endl;
+        return;
     }
     
-    string line;
-    while (getline(file, line)) {
-        if (!line.empty()) {
-            lines.push_back(line);
-        }
+    for (const Customer& customer : customers) {
+        outFile.write(reinterpret_cast<const char*>(&customer), sizeof(Customer));
     }
-    
-    file.close();
-    return lines;
+    outFile.close();
 }
 
-bool FileHandler::writeLine(const string& filename, const string& line) {
-    ofstream file(filename, ios::out | ios::trunc);
-    if (!file.is_open()) {
-        cerr << "Error opening file for writing: " << filename << endl;
-        return false;
+vector<Customer> FileHandler::loadCustomers() {
+    vector<Customer> customers;
+    ifstream inFile("customers.dat", ios::binary);
+    
+    if (!inFile) {
+        cerr << "No existing customer file found. Creating new one." << endl;
+        return customers;
     }
     
-    file << line << endl;
-    file.close();
-    return true;
+    Customer customer;
+    while (inFile.read(reinterpret_cast<char*>(&customer), sizeof(Customer))) {
+        customers.push_back(customer);
+    }
+    inFile.close();
+    return customers;
 }
 
-bool FileHandler::appendLine(const string& filename, const string& line) {
-    ofstream file(filename, ios::out | ios::app);
-    if (!file.is_open()) {
-        cerr << "Error opening file for appending: " << filename << endl;
-        return false;
+// Vehicle file operations
+void FileHandler::saveVehicles(const vector<Vehicle>& vehicles) {
+    ofstream outFile("vehicles.dat", ios::binary);
+    if (!outFile) {
+        cerr << "Error opening file for writing vehicles!" << endl;
+        return;
     }
     
-    file << line << endl;
-    file.close();
-    return true;
+    for (const Vehicle& vehicle : vehicles) {
+        outFile.write(reinterpret_cast<const char*>(&vehicle), sizeof(Vehicle));
+    }
+    outFile.close();
 }
 
-bool FileHandler::removeLine(const string& filename, const string& lineToRemove) {
-    vector<string> lines = readAllLines(filename);
-    bool found = false;
+vector<Vehicle> FileHandler::loadVehicles() {
+    vector<Vehicle> vehicles;
+    ifstream inFile("vehicles.dat", ios::binary);
     
-    for (auto it = lines.begin(); it != lines.end(); ) {
-        if (*it == lineToRemove) {
-            it = lines.erase(it);
-            found = true;
-        } else {
-            ++it;
-        }
+    if (!inFile) {
+        cerr << "No existing vehicle file found. Creating new one." << endl;
+        return vehicles;
     }
     
-    if (!found) {
-        return false;
+    Vehicle vehicle;
+    while (inFile.read(reinterpret_cast<char*>(&vehicle), sizeof(Vehicle))) {
+        vehicles.push_back(vehicle);
     }
-    
-    ofstream file(filename, ios::out | ios::trunc);
-    if (!file.is_open()) {
-        cerr << "Error opening file for updating: " << filename << endl;
-        return false;
-    }
-    
-    for (const string& line : lines) {
-        file << line << endl;
-    }
-    
-    file.close();
-    return true;
+    inFile.close();
+    return vehicles;
 }
 
-bool FileHandler::createBackup(const string& sourceFile, const string& backupDir) {
-    if (!fileExists(sourceFile)) {
-        cerr << "Source file doesn't exist for backup: " << sourceFile << endl;
-        return false;
+// Rental records file operations
+void FileHandler::saveRentalRecords(const vector<RentalRecord>& records) {
+    ofstream outFile("rental_records.dat", ios::binary);
+    if (!outFile) {
+        cerr << "Error opening file for writing rental records!" << endl;
+        return;
     }
     
-    // Create backup directory if it doesn't exist
-    if (!fileExists(backupDir)) {
-#ifdef _WIN32
-        mkdir(backupDir.c_str());
-#else
-        mkdir(backupDir.c_str(), 0777);
-#endif
+    for (const RentalRecord& record : records) {
+        outFile.write(reinterpret_cast<const char*>(&record), sizeof(RentalRecord));
+    }
+    outFile.close();
+}
+
+vector<RentalRecord> FileHandler::loadRentalRecords() {
+    vector<RentalRecord> records;
+    ifstream inFile("rental_records.dat", ios::binary);
+    
+    if (!inFile) {
+        cerr << "No existing rental records file found. Creating new one." << endl;
+        return records;
     }
     
-    // Generate timestamp for backup filename
-    time_t now = time(0);
-    tm* ltm = localtime(&now);
-    stringstream ss;
-    ss << backupDir << "backup_"
-       << 1900 + ltm->tm_year << "_"
-       << setw(2) << setfill('0') << 1 + ltm->tm_mon << "_"
-       << setw(2) << setfill('0') << ltm->tm_mday << "_"
-       << setw(2) << setfill('0') << ltm->tm_hour << "_"
-       << setw(2) << setfill('0') << ltm->tm_min << "_"
-       << setw(2) << setfill('0') << ltm->tm_sec << "_"
-       << sourceFile.substr(sourceFile.find_last_of("/\\") + 1);
-    
-    string backupFile = ss.str();
-    
-    ifstream src(sourceFile, ios::binary);
-    ofstream dst(backupFile, ios::binary);
-    
-    if (!src.is_open() || !dst.is_open()) {
-        cerr << "Error creating backup from " << sourceFile << " to " << backupFile << endl;
-        return false;
+    RentalRecord record;
+    while (inFile.read(reinterpret_cast<char*>(&record), sizeof(RentalRecord))) {
+        records.push_back(record);
     }
-    
-    dst << src.rdbuf();
-    
-    src.close();
-    dst.close();
-    
-    return true;
+    inFile.close();
+    return records;
 }
