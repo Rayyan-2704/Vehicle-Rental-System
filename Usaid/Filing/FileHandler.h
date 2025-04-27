@@ -4,24 +4,29 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <string>
+#include "Admin.h"
+#include "Customer.h"
+#include "Vehicle.h"
 
 using namespace std;
 
 class FileHandler {
 public:
-    // Generic file operations
-    static bool fileExists(const string& filename);
-    static bool createFile(const string& filename);
+    // Admin related file operations
+    static void saveAdmins(const vector<Admin>& admins);
+    static vector<Admin> loadAdmins();
     
-    // Data operations
-    static vector<string> readAllLines(const string& filename);
-    static bool writeLine(const string& filename, const string& line);
-    static bool appendLine(const string& filename, const string& line);
-    static bool removeLine(const string& filename, const string& line);
+    // Customer related file operations
+    static void saveCustomers(const vector<Customer>& customers);
+    static vector<Customer> loadCustomers();
     
-    // Backup operations
-    static bool createBackup(const string& sourceFile, const string& backupDir = "backups/");
+    // Vehicle related file operations
+    static void saveVehicles(const vector<Vehicle>& vehicles);
+    static vector<Vehicle> loadVehicles();
+    
+    // Rental records
+    static void saveRentalRecords(const vector<RentalRecord>& records);
+    static vector<RentalRecord> loadRentalRecords();
 };
 
 #endif
