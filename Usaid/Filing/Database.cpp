@@ -1,16 +1,25 @@
 #include "Database.h"
-#include <stdexcept>
+#include <fstream>
+#include <sys/stat.h>
+#include <iostream>
+
+using namespace std;
 
 // Initialize static members
-std::vector<Vehicle> Database::vehicles;
-std::vector<Customer> Database::customers;
-std::vector<Rental> Database::rentals;
+vector<Vehicle> Database::vehicles;
+vector<Customer> Database::customers;
+vector<Rental> Database::rentals;
 
-const std::string Database::VEHICLE_FILE = "data/vehicles.dat";
-const std::string Database::CUSTOMER_FILE = "data/customers.dat";
-const std::string Database::RENTAL_FILE = "data/rentals.dat";
+const string Database::VEHICLE_FILE = "data/vehicles.dat";
+const string Database::CUSTOMER_FILE = "data/customers.dat";
+const string Database::RENTAL_FILE = "data/rentals.dat";
+
+void Database::createDataDirectory() {
+    mkdir("data", 0777); // Create directory if it doesn't exist
+}
 
 void Database::initialize() {
+    createDataDirectory();
     loadAllData();
 }
 
@@ -20,14 +29,11 @@ void Database::cleanup() {
 
 void Database::saveAllData() {
     try {
-        // Create data directory if it doesn't exist
-        system("mkdir -p data");
-        
         Vehicle::saveToFile(vehicles, VEHICLE_FILE);
         Customer::saveToFile(customers, CUSTOMER_FILE);
         Rental::saveToFile(rentals, RENTAL_FILE);
-    } catch (const std::exception& e) {
-        std::cerr << "Error saving data: " << e.what() << std::endl;
+    } catch (const exception& e) {
+        cerr << "Error saving data: " << e.what() << endl;
     }
 }
 
@@ -36,9 +42,8 @@ void Database::loadAllData() {
         vehicles = Vehicle::loadFromFile(VEHICLE_FILE);
         customers = Customer::loadFromFile(CUSTOMER_FILE);
         rentals = Rental::loadFromFile(RENTAL_FILE);
-    } catch (const std::exception& e) {
-        std::cerr << "Error loading data: " << e.what() << std::endl;
-        // Initialize empty vectors if files don't exist
+    } catch (const exception& e) {
+        cout << "No existing data found. Starting with fresh database." << endl;
         vehicles.clear();
         customers.clear();
         rentals.clear();
