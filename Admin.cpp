@@ -42,61 +42,61 @@ void Admin::editDetails()
 {
     string newName, newEmail, newPass, newPhone, newAddress;
     system("cls");
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     printFormattedText("Editing Admin Details", COLOR_BLUE, true);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     // cout << "Editing Admin " << userID << " details" << endl;
 
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     // cout << "Current username: " << userName << endl;
     printFormattedText("Current Username: " + userName, COLOR_WHITE, false);
     // cout << "Enter new username: ";
     printFormattedText("Enter new username:", COLOR_WHITE, false);
-    cout << COLOR_CYAN "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, newName);
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << "Current email: " << userEmail << endl;
     printFormattedText("Current Email: " + userEmail, COLOR_WHITE, false);
     // cout << "Enter new email: ";
     printFormattedText("Enter new email: ", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " COLOR_RESET;
+    printInputPrompt();
     getline(cin, newEmail);
     while (!isEmailValid(newEmail))
     {
         // cout << "Invalid email entered! Please enter an email with the correct format:";
         printFormattedText("Invalid email entered! Please enter an email with the correct format: ", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        printInputPrompt();
         getline(cin, newEmail);
     }
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << "Current password: " << userPassword << endl;
     printFormattedText("Current Password: " + userPassword, COLOR_WHITE, false);
     // cout << "Enter new password: ";
     printFormattedText("Enter new password: ", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     newPass = maskedPassword();
     cout << endl;
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << "Current phone number: " << userPhoneNumber << endl;
     printFormattedText("Current Phone Number: " + userPhoneNumber, COLOR_WHITE, false);
     // cout << "Enter new phone number: ";
     printFormattedText("Enter new phone number: ", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, newPhone);
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << "Current Address: " << userAddress << endl;
     printFormattedText("Current Address: " + userAddress, COLOR_WHITE, false);
     // cout << "\tEnter new address: ";
     printFormattedText("Enter new address: ", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, newAddress);
 
     // system("cls");
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     char confirmation;
     // cout << "Username: " << newName << endl;
     // cout << "Email: " << newEmail << endl;
@@ -110,28 +110,28 @@ void Admin::editDetails()
     printFormattedText("Address: " + newAddress, COLOR_WHITE, false);
     // cout << "Please confirm your updated details. Would you like to save your changes? (Y/N): ";
     printFormattedText("Please confirm your updated details. Would you like to save your changes? (Y/N): ", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     cin >> confirmation;
     cin.ignore();
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     if (confirmation == 'y' || confirmation == 'Y')
     {
         updateUserProfile(newName, newEmail, newPass, newPhone, newAddress);
         // cout << "User profile updated successfully!" << endl;
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("Admin profile details updated successfully!", COLOR_GREEN, true);    
     }
     else
     {
         // cout << "Discarding the changes made." << endl;
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("Discarding the changes made.", COLOR_RED, true);
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
     // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     system("pause");
 }
 
@@ -147,12 +147,12 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
     do
     {
         system("cls");
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         // cout << "Adding new vehicle to the inventory" << endl;
         printFormattedText("Adding New Vehicle To The Inventory", COLOR_BLUE, true);
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         // cout << "Choose the vehicle type to add:" << endl;
         printFormattedText("Choose the vehicle type to add:", COLOR_WHITE, false);
         for (int i = 0; i < 3; i++)
@@ -167,7 +167,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, false);
             }
         }
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
         pressedKey = _getch();
         if ((pressedKey == 'w' || pressedKey == 'W'|| pressedKey == 72) && (choice > 0))
@@ -202,10 +202,10 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
 
     newVehicle->addVehicle();
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << endl << "Please confirm to add the new vehicle to the inventory. (Y/N): ";
     printFormattedText("Please confirm to add the new vehicle to the inventory. (Y/N): ", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     cin >> confirmation;
     cin.ignore();
     
@@ -213,7 +213,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
     {
         inventory.push_back(newVehicle);
         // cout << "New vehicle (" << newVehicle->getVehicleID() << ") has been added to the inventory successfully!" << endl;
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("New vehicle (" + newVehicle->getVehicleID() + ") has been added to the inventory successfully!", COLOR_GREEN, true);
     }
     else
@@ -221,13 +221,13 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
         newVehicle->incrementOrDecrementIDCounter(false);
         delete newVehicle;
         // cout << "Discarding the changes made." << endl;
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("Discarding the changes made.", COLOR_RED, true);
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
     // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     system("pause");
 }
 
@@ -239,22 +239,22 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
     int i;
 
     system("cls");
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     // cout << "Removing vehicle from the inventory" << endl;
     printFormattedText("Removing Vehicle From The Inventory" , COLOR_BLUE, true);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
 
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     for (i = 0; i < inventory.size(); i++)
     {
         // cout << "Vehicle " << (i + 1) << ": " << inventory[i]->getVehicleID() << " | Vehicle Type: " << inventory[i]->getVehicleType() << endl;
         printFormattedText("Vehicle " + to_string(i + 1) + ": " + inventory[i]->getVehicleID() + " | Vehicle Type: " + inventory[i]->getVehicleType() , COLOR_WHITE, false);
     }
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << endl << "Enter the vehicle ID of the vehicle to be removed from the inventory: ";
     printFormattedText("Enter the vehicle ID of the vehicle to be removed from the inventory:", COLOR_WHITE, false);
-    cout << COLOR_CYAN "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, id);
 
     for (i = 0; i < inventory.size(); i++)
@@ -270,7 +270,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
     {
         // cout << endl << "Invalid vehicle ID!" << endl << "Enter the valid vehicle ID of the vehicle to be removed from the inventory: ";
         printFormattedText("Invalid vehicle ID! Enter the valid vehicle ID of the vehicle to be removed from the inventory: ", COLOR_WHITE, false);
-        cout << COLOR_CYAN "| >> " << COLOR_RESET;
+        printInputPrompt();
         getline(cin, id);
 
         for (i = 0; i < inventory.size(); i++)
@@ -283,10 +283,10 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
         }
     }
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << endl << "Please confirm to remove vehicle (" << id << ") from the inventory. (Y/N): ";
     printFormattedText("Please confirm to remove vehicle (" + id + ") from the inventory. (Y/N): ", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     cin >> confirmation;
     cin.ignore();
     
@@ -295,37 +295,37 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
         delete inventory[i];
         inventory.erase(inventory.begin() + i);
         // cout << "Vehicle (" << id << ") has been removed from the inventory successfully!" << endl;
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("Vehicle (" + id + ") has been removed from the inventory successfully!", COLOR_GREEN, true);
     }
     else
     {
         // cout << "Discarding the changes made." << endl;
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("Discarding the changes made.", COLOR_RED, true);   
     }
 
     // cout << "Press any key to return to the main menu..." << endl;
     // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     system("pause");
 }
 
 void Admin::viewAllVehicles(const vector <Vehicle*> &inventory)
 {
     system("cls");
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     // cout << "Viewing All Vehicles From The Inventory" << endl;
     printFormattedText("Viewing All Vehicles From The Inventory" , COLOR_BLUE, true);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     for (int i = 0; i < inventory.size(); i++)
     {
         cout << *inventory[i];
     }
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << endl << "Total number of vehicles in the inventory: " << Vehicle::getVehiclesCount() << endl;
     // cout << "Total number of cars in the inventory: " << Car::getCarsCount() << endl;
     // cout << "Total number of bikes in the inventory: " << Bike::getBikesCount() << endl;
@@ -335,10 +335,10 @@ void Admin::viewAllVehicles(const vector <Vehicle*> &inventory)
     printFormattedText("Total number of bikes in the inventory: " + to_string(Bike::getBikesCount()), COLOR_WHITE, false);
     printFormattedText("Total number of trucks in the inventory: " + to_string(Truck::getTrucksCount()), COLOR_WHITE, false);
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     // cout << "Press any key to return to the main menu..." << endl;
     // printFormattedText("Press any key to return to the main menu...", COLOR_WHITE, false);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     system("pause");
 }
 
@@ -359,16 +359,16 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
     do
     {
         system("cls");
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         // cout << "Admin Console" << endl;
         printFormattedText("Admin Console", COLOR_BLUE, true);
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
         // cout << "Welcome, Admin " << userName << "!" << endl << endl;
         printFormattedText("Welcome, Admin " + userName + "!", COLOR_WHITE, true);
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         // cout << "Menu Actions:" << endl;
         printFormattedText("Menu Actions:", COLOR_MAGENTA, true);
         for (int i = 0; i < 5; i++)
@@ -383,7 +383,7 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, true);
             }
         }
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
         pressedKey = _getch();
         if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 0))

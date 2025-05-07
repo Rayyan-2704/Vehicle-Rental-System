@@ -50,7 +50,7 @@ void Truck::displayVehicleDetails(ostream &os) const
     printFormattedText("Brand: " + brand + " | Model: " + model + " | Type: " + vehicleType, COLOR_WHITE, false);
     printFormattedText("Rate: $" + to_string(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
     printFormattedText("Load Capacity: " + to_string(loadCapacity) + " kg" , COLOR_WHITE, false);
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
 }
 
 void Truck::addVehicle()
@@ -59,24 +59,24 @@ void Truck::addVehicle()
     printFormattedText("Enter the details of the new TRUCK below", COLOR_WHITE, false);
     // cout << "Enter the brand of the new truck: ";
     printFormattedText("Enter the brand of the new truck:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " COLOR_RESET;
+    printInputPrompt();
     getline(cin, brand);
 
     // cout << "Enter the model of the new truck: ";
     printFormattedText("Enter the model of the new truck:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " COLOR_RESET;
+    printInputPrompt();
     getline(cin, model);
 
     // cout << "Enter the license plate of the new truck: ";
     printFormattedText("Enter the license plate of the new truck:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " COLOR_RESET;
+    printInputPrompt();
     getline(cin, licensePlate);
 
     do
     {
         // cout << "Enter the rate per day of the new truck: ";
         printFormattedText("Enter the rate per day of the new truck:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " COLOR_RESET;
+        printInputPrompt();
         cin >> ratePerDay;
         if (ratePerDay <= 0)
         {
@@ -88,7 +88,7 @@ void Truck::addVehicle()
     do {
         // cout << "Enter the load capacity (in kg) of the new truck: ";
         printFormattedText("Enter the load capacity (in kg) of the new truck:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " COLOR_RESET;
+        printInputPrompt();
         cin >> loadCapacity;
         if (loadCapacity <= 0) 
         {

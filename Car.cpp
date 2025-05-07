@@ -50,7 +50,7 @@ void Car::displayVehicleDetails(ostream &os) const
     printFormattedText("Brand: " + brand + " | Model: " + model + " | Type: " + vehicleType, COLOR_WHITE, false);
     printFormattedText("Rate: $" + to_string(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
     printFormattedText("Fuel Type: " + fuelType, COLOR_WHITE, false);
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
 }
 
 void Car::addVehicle()
@@ -59,24 +59,24 @@ void Car::addVehicle()
     printFormattedText("Enter the details of the new CAR below", COLOR_WHITE, false);
     // cout << "Enter the brand of the new car: ";
     printFormattedText("Enter the brand of the new car:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, brand);
 
     // cout << "Enter the model of the new car: ";
     printFormattedText("Enter the model of the new car:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, model);
 
     // cout << "Enter the license plate of the new car: ";
     printFormattedText("Enter the license plate of the new car:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, licensePlate);
 
     do
     {
         // cout << "Enter the rate per day of the new car: ";
         printFormattedText("Enter the rate per day of the new car:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        printInputPrompt();
         cin >> ratePerDay;
         if (ratePerDay <= 0)
         {
@@ -88,7 +88,7 @@ void Car::addVehicle()
 
     // cout << "Enter the fuel type of the new car: ";
     printFormattedText("Enter the fuel type of the new car:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, fuelType);
 
     isAvailable = true;

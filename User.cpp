@@ -36,14 +36,14 @@ void User::registerUser()
     // getline(cin, userAddress);
 
     printFormattedText("Enter the full name of the user:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, userName);
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     do
     {
         printFormattedText("Enter the email of the user:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        printInputPrompt();
         getline(cin, userEmail);
         if(!isEmailValid(userEmail))
         {
@@ -52,16 +52,16 @@ void User::registerUser()
     } while (!isEmailValid(userEmail));
     
     string repeatedPassword;
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     do
     {
         printFormattedText("Enter the password of the user:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        printInputPrompt();
         userPassword = maskedPassword();
         cout << endl;
 
         printFormattedText("Enter password again for confirmation:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        printInputPrompt();
         repeatedPassword = maskedPassword();
         cout << endl;
 
@@ -71,14 +71,14 @@ void User::registerUser()
         }
     } while (repeatedPassword != userPassword);
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     printFormattedText("Enter the phone number of the user:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, userPhoneNumber);
 
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
     printFormattedText("Enter the address of the user:", COLOR_WHITE, false);
-    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+    printInputPrompt();
     getline(cin, userAddress);
 }
 

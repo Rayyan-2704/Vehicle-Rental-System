@@ -22,10 +22,13 @@ void printProjectTitle();
 ostream &printFormattedText(const string &text, const string &color, bool isCenter);
 
 /* Prints line with dashes */
-ostream &printLineWithDashes(const string &color);
+ostream &printLineWithDashes();
 
 /* Prints line with spaces */
-ostream &printLineWithSpaces(const string &color);
+ostream &printLineWithSpaces();
+
+/* Prints the input prompt */
+void printInputPrompt();
 
 /* Gets the width of the screen */
 int getScreenWidth();

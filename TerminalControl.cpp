@@ -32,16 +32,21 @@ ostream &printFormattedText(const string &text, const string &color, bool isCent
     return cout;
 }
 
-ostream &printLineWithDashes(const string &color)
+ostream &printLineWithDashes()
 {
-    cout << color << "+" << string(getScreenWidth(), '-') << "+" << COLOR_RESET << endl;
+    cout << COLOR_CYAN << "+" << string(getScreenWidth(), '-') << "+" << COLOR_RESET << endl;
     return cout;
 }
 
-ostream &printLineWithSpaces(const string &color)
+ostream &printLineWithSpaces()
 {
-    cout << color << "|" << string(getScreenWidth(), ' ') << "|" << COLOR_RESET << endl;
+    cout << COLOR_CYAN << "|" << string(getScreenWidth(), ' ') << "|" << COLOR_RESET << endl;
     return cout;
+}
+
+void printInputPrompt() 
+{
+    cout << COLOR_CYAN << "| >> " << COLOR_RESET;
 }
 
 int getScreenWidth()

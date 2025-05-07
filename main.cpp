@@ -70,11 +70,11 @@ int main()
         system("cls");
         printProjectTitle();
 
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("User Access Portal", COLOR_BLUE, true);
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         for(int i = 0; i < 3; i++)
         {
             if(i == choice)
@@ -86,9 +86,9 @@ int main()
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, true);
             }
         }
-        printLineWithSpaces(COLOR_CYAN);
+        printLineWithSpaces();
         printFormattedText("Navigate with W/S or Arrow Keys", COLOR_WHITE, false);
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
         maskCursor();
         pressedKey = _getch();
@@ -149,11 +149,11 @@ void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vec
     {
         system("cls");
         printProjectTitle();
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("Select And Proceed", COLOR_BLUE, true);
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         for(int i = 0; i < 3; i++)
         {
             if(i == choice)
@@ -165,7 +165,7 @@ void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vec
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, true);
             }
         }
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
 
         pressedKey = _getch();
         if ((pressedKey == 'w' || pressedKey == 'W' || pressedKey == 72) && (choice > 0))
@@ -218,20 +218,20 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
     }
 
     system("cls");
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     printFormattedText((string)((userType == "Admin") ? "Admin" : "Customer") + " Login", COLOR_BLUE, true);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
 
     do
     {
-        printLineWithDashes(COLOR_CYAN);
+        printLineWithDashes();
         printFormattedText("Enter Email Address:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        printInputPrompt();
         getline(cin, enteredEmail);
         
-        printLineWithSpaces(COLOR_CYAN);
+        printLineWithSpaces();
         printFormattedText("Enter Password:", COLOR_WHITE, false);
-        cout << COLOR_CYAN << "| >> " << COLOR_RESET;
+        printInputPrompt();
         enteredPass = maskedPassword();
         cout << endl;
 
@@ -240,9 +240,9 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
             if(users[i]->verifyLogin(enteredEmail, enteredPass))
             {
                 flag = true;
-                printLineWithDashes(COLOR_CYAN);
+                printLineWithDashes();
                 printFormattedText("Login Successful!", COLOR_GREEN, true);
-                printLineWithDashes(COLOR_CYAN);
+                printLineWithDashes();
                 system("pause");
                 users[i]->userConsole(inventory);
                 return;
@@ -251,9 +251,9 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
 
         if(!flag)
         {
-            printLineWithDashes(COLOR_CYAN);
+            printLineWithDashes();
             printFormattedText("Wrong Email or Password! Try again", COLOR_RED, true);
-            printLineWithDashes(COLOR_CYAN);
+            printLineWithDashes();
             system("pause");
         }
     } while (!flag);
@@ -264,11 +264,11 @@ void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const 
     User *newUser;
     
     system("cls");
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     printFormattedText((string)((userType == "Admin") ? "Admin" : "Customer") + " Registration Form", COLOR_BLUE, true);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
 
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     if(userType == "Admin")
     {
         newUser = new Admin();
@@ -288,8 +288,8 @@ void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const 
         customers.push_back(static_cast <Customer*> (newUser));
     }
 
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     printFormattedText("Registration Successful!", COLOR_GREEN, true);
-    printLineWithDashes(COLOR_CYAN);
+    printLineWithDashes();
     system("pause");
 }

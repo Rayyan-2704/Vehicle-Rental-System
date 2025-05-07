@@ -46,7 +46,7 @@ void Booking::displayBookingDetails() const
     // cout << "Rent Date: " << rentDate << " | Rent Duration: " << rentDuration <<  " days" << " | Total Rental Cost: $"  << rentalCost << endl;
     printFormattedText("Booking ID: " + bookingID + " | Booked Vehicle ID: " + bookedVehicleID + " | Booked Customer ID: " + bookedCustomerID, COLOR_WHITE, false);
     printFormattedText("Rent Date: " + rentDate + " | Rent Duration: " + to_string(rentDuration) +  " days" + " | Total Rental Cost: $"  + to_string(rentalCost), COLOR_WHITE, false);
-    printLineWithSpaces(COLOR_CYAN);
+    printLineWithSpaces();
 }
 
 void Booking::setBookedVehicleID(const string &vID) { bookedVehicleID = vID; }
