@@ -38,7 +38,7 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 📁 Vehicle-Rental-System/
 ├── main.cpp # Entry point of the application
 ├── FileHandler.cpp/.h # Handles all CSV file operations
-├── TerminalManipulation.cpp/.h # Console UI styling and formatting
+├── TerminalControl.cpp/.h # Console UI styling and formatting
 ├── Vehicle.cpp/.h # Base Vehicle class
 ├── Car.cpp/.h # Derived class for Car
 ├── Bike.cpp/.h # Derived class for Bike
@@ -65,12 +65,12 @@ cd Vehicle-Rental-System
 
 2. Compile all source files:
 ``` bash
-g++ main.cpp TerminalManipulation.cpp FileHandler.cpp Vehicle.cpp Car.cpp Bike.cpp Truck.cpp Booking.cpp User.cpp Admin.cpp Customer.cpp -o VehicleRentalSystem.exe
+g++ main.cpp TerminalControl.cpp FileHandler.cpp Vehicle.cpp Car.cpp Bike.cpp Truck.cpp Booking.cpp User.cpp Admin.cpp Customer.cpp -o VehicleRentalSystem.exe
 ```
 
 3. Run the program:
 ```bash
-./VehicleRentalSystem.exe
+.\VehicleRentalSystem.exe
 ```
 
 ---
