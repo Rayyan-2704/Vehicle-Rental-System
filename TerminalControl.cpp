@@ -23,7 +23,7 @@ void printProjectTitle()
          << "\n" << COLOR_RESET;
 }
 
-ostream &printFormattedText(const string &text, const string &color, bool isCenter)
+void printFormattedText(const string &text, const string &color, bool isCenter)
 {
     int paddingBefore = isCenter ? (getScreenWidth() - text.length()) / 2 : 0;
     int paddingAfter = getScreenWidth() - (text.length() + paddingBefore);
@@ -31,19 +31,16 @@ ostream &printFormattedText(const string &text, const string &color, bool isCent
     string lineToBePrinted = string(COLOR_CYAN) + "|" + COLOR_RESET + string(paddingBefore, ' ') + color + text + COLOR_RESET + string(paddingAfter, ' ') + COLOR_CYAN + "|" + COLOR_RESET;
 
     cout << lineToBePrinted << endl;
-    return cout;
 }
 
-ostream &printLineWithDashes()
+void printLineWithDashes()
 {
     cout << COLOR_CYAN << "+" << string(getScreenWidth(), '-') << "+" << COLOR_RESET << endl;
-    return cout;
 }
 
-ostream &printLineWithSpaces()
+void printLineWithSpaces()
 {
     cout << COLOR_CYAN << "|" << string(getScreenWidth(), ' ') << "|" << COLOR_RESET << endl;
-    return cout;
 }
 
 void printInputPrompt() 

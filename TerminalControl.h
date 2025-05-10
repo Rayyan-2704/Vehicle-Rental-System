@@ -19,13 +19,13 @@ using namespace std;
 void printProjectTitle();
 
 /* Prints the formatted text */
-ostream &printFormattedText(const string &text, const string &color, bool isCenter);
+void printFormattedText(const string &text, const string &color, bool isCenter);
 
 /* Prints line with dashes */
-ostream &printLineWithDashes();
+void printLineWithDashes();
 
 /* Prints line with spaces */
-ostream &printLineWithSpaces();
+void printLineWithSpaces();
 
 /* Prints the input prompt */
 void printInputPrompt();

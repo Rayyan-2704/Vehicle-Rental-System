@@ -180,7 +180,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
         {
             choice++;
         }
-        else if (pressedKey == '\r' || pressedKey == ' ')
+        else if (pressedKey == '\r')
         {
             switch (choice)
             {
@@ -406,7 +406,7 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
         {
             choice++;
         }
-        else if (pressedKey == '\r' || pressedKey == ' ')
+        else if (pressedKey == '\r')
         {
             switch (choice)
             {

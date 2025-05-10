@@ -192,7 +192,7 @@ void Customer::rentVehicle(vector <Vehicle*> &inventory)
         {
             choice++;
         }
-        else if (pressedKey == '\r' || pressedKey == ' ')
+        else if (pressedKey == '\r')
         {
             switch (choice)
             {
@@ -475,7 +475,7 @@ void Customer::userConsole(vector <Vehicle*> &inventory)
         {
             choice++;
         }
-        else if (pressedKey == '\r' || pressedKey == ' ') 
+        else if (pressedKey == '\r') 
         {
             switch (choice)
             {

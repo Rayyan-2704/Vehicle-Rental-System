@@ -129,7 +129,7 @@ int main()
         {
             choice++;
         }
-        else if (pressedKey == '\r' || pressedKey == ' ')
+        else if (pressedKey == '\r')
         {
             switch (choice)
             {
@@ -227,7 +227,7 @@ void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vec
         {
             choice++;
         }
-        else if (pressedKey == '\r' || pressedKey == ' ')
+        else if (pressedKey == '\r')
         {
             switch (choice)
             {
