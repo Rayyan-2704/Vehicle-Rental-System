@@ -22,7 +22,7 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 
 * ✅ **Abstraction** (Simplified interaction through high-level interfaces)
 * ✅ **Encapsulation** (Private data with getters/setters)
-* ✅ **Inheritance** (`Car`, `Bike`, `Truck` inherit from `Vehicle`)
+* ✅ **Inheritance** (`Car`, `Bike`, `Truck` inherit from `Vehicle` & `Admin`, `Customer` inherit from `User`)
 * ✅ **Polymorphism** (Virtual methods for runtime behavior)
 * ✅ **Class Templates** (Generic components if applicable)
 * ✅ **File Handling** (Persistent data via CSV files)
@@ -58,8 +58,8 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 
 1. Clone the repository:
  ```bash
-git clone https://github.com/yourusername/vehicle-rental-system.git
-cd vehicle-rental-system
+git clone https://github.com/Rayyan-2704/Vehicle-Rental-System.git
+cd Vehicle-Rental-System
 ```
 
 2. Compile all source files:
