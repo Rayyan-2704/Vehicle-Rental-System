@@ -34,7 +34,7 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 ## 🏗️ System Structure
 
 ```bash
-📁 VehicleRentalSystem/
+📁 Vehicle-Rental-System/
 ├── main.cpp # Entry point of the application
 ├── FileHandler.cpp/.h # Handles all CSV file operations
 ├── TerminalManipulation.cpp/.h # Console UI styling and formatting
