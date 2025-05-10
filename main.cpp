@@ -11,6 +11,7 @@
 #include "Truck.h"
 #include "Booking.h"
 #include "TerminalControl.h"
+#include "FileHandler.h"
 using namespace std;
 
 void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vector <Vehicle*> &inventory, const string &userType);
@@ -19,46 +20,56 @@ void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const 
 
 int main()
 {
-    vector <Admin*> admins = {
-        new Admin("Rayyan Aamir", "k240687@nu.edu.pk", "pass123", "1234567", "Block-J North Nazimabad"),
-        new Admin("Usaid Khan", "k240732@nu.edu.pk", "qwer789", "0987653", "Naya Nazimabad"),
-        new Admin("Hammad Haider", "k240634@nu.edu.pk", "wasd456", "3874590", "5-Star North Nazimabad")
-    };
+    // vector <Admin*> admins = {
+    //     new Admin("Rayyan Aamir", "k240687@nu.edu.pk", "pass123", "1234567", "Block-J North Nazimabad"),
+    //     new Admin("Usaid Khan", "k240732@nu.edu.pk", "qwer789", "0987653", "Naya Nazimabad"),
+    //     new Admin("Hammad Haider", "k240634@nu.edu.pk", "wasd456", "3287459", "5-Star North Nazimabad")
+    // };
 
-    vector <Customer*> customers = {
-        new Customer("Jules Kounde", "juleskounde@gmail.com", "barca687", "5840339", "Clifton"),
-        new Customer("Ammar Baig", "ammarbaig@gmail.com", "ketw484", "9698348", "DHA Phase 7"),
-        new Customer("Sahal Arif", "sahalarif@gmail.com", "vmds458", "3948851", "Shahrah-e-Faisal")
-    };
+    // vector <Customer*> customers = {
+    //     new Customer("Jules Kounde", "juleskounde@gmail.com", "barca687", "5840339", "Clifton"),
+    //     new Customer("Ammar Baig", "ammarbaig@gmail.com", "ketw484", "9698348", "DHA Phase 7"),
+    //     new Customer("Sahal Arif", "sahalarif@gmail.com", "vmds458", "3948851", "Shahrah-e-Faisal")
+    // };
 
-    vector <Vehicle*> vehicles = {
-        new Car("Toyota", "Corolla", "ABC-123", 50.0, true, "Petrol"),
-        new Car("Honda", "Civic", "DEF-456", 55.0, true, "Petrol"),
-        new Car("Tesla", "Model 3", "GHI-789", 75.0, true, "Electric"),
-        new Car("Ford", "Mustang", "BCD-777", 85.0, false, "Petrol"),  // assuming it is already booked
+    // vector <Vehicle*> vehicles = {
+    //     new Car("Toyota", "Corolla", "ABC-123", 50.0, true, "Petrol"),
+    //     new Car("Honda", "Civic", "DEF-456", 55.0, true, "Petrol"),
+    //     new Car("Tesla", "Model 3", "GHI-789", 75.0, true, "Electric"),
+    //     new Car("Ford", "Mustang", "BCD-777", 85.0, false, "Petrol"),  // assuming it is already booked
 
-        new Bike("Yamaha", "R15", "JKL-111", 20.0, true, 150),
-        new Bike("Honda", "CBR500R", "MNO-222", 25.0, true, 500),
-        new Bike("Suzuki", "GSX-R600", "PQR-333", 30.0, false, 600),  // assuming it is already booked
-        new Bike("Kawasaki", "Ninja 300", "EFG-888", 28.0, false, 300),  // assuming it is already booked
+    //     new Bike("Yamaha", "R15", "JKL-111", 20.0, true, 150),
+    //     new Bike("Honda", "CBR500R", "MNO-222", 25.0, true, 500),
+    //     new Bike("Suzuki", "GSX-R600", "PQR-333", 30.0, false, 600),  // assuming it is already booked
+    //     new Bike("Kawasaki", "Ninja 300", "EFG-888", 28.0, false, 300),  // assuming it is already booked
 
-        new Truck("Volvo", "FH16", "STU-444", 120.0, true, 20000.0),
-        new Truck("Scania", "R500", "VWX-555", 110.0, true, 18000.0),
-        new Truck("MAN", "TGX", "YZA-666", 130.0, true, 22000.0),
-        new Truck("Mercedes", "Actros", "HIJ-999", 125.0, false, 25000.0)  // assuming it is already booked
-    };
+    //     new Truck("Volvo", "FH16", "STU-444", 120.0, true, 20000.0),
+    //     new Truck("Scania", "R500", "VWX-555", 110.0, true, 18000.0),
+    //     new Truck("MAN", "TGX", "YZA-666", 130.0, true, 22000.0),
+    //     new Truck("Mercedes", "Actros", "HIJ-999", 125.0, false, 25000.0)  // assuming it is already booked
+    // };
 
-    vector <Booking*> totalBookings = {
-        new Booking(vehicles[3]->getVehicleID(), customers[0]->getUserID(), 10, vehicles[3]->getRatePerDay()),
-        new Booking(vehicles[6]->getVehicleID(), customers[0]->getUserID(), 5, vehicles[6]->getRatePerDay()),
-        new Booking(vehicles[7]->getVehicleID(), customers[1]->getUserID(), 7, vehicles[7]->getRatePerDay()),
-        new Booking(vehicles[11]->getVehicleID(), customers[2]->getUserID(), 25, vehicles[11]->getRatePerDay())
-    };
+    // vector <Booking*> totalBookings = {
+    //     new Booking(vehicles[3]->getVehicleID(), customers[0]->getUserID(), 10, vehicles[3]->getRatePerDay()),
+    //     new Booking(vehicles[6]->getVehicleID(), customers[0]->getUserID(), 5, vehicles[6]->getRatePerDay()),
+    //     new Booking(vehicles[7]->getVehicleID(), customers[1]->getUserID(), 7, vehicles[7]->getRatePerDay()),
+    //     new Booking(vehicles[11]->getVehicleID(), customers[2]->getUserID(), 25, vehicles[11]->getRatePerDay())
+    // };
 
-    customers[0]->addBooking(*totalBookings[0]);
-    customers[0]->addBooking(*totalBookings[1]);
-    customers[1]->addBooking(*totalBookings[2]);
-    customers[2]->addBooking(*totalBookings[3]);
+    // customers[0]->addBooking(*totalBookings[0]);
+    // customers[0]->addBooking(*totalBookings[1]);
+    // customers[1]->addBooking(*totalBookings[2]);
+    // customers[2]->addBooking(*totalBookings[3]);
+
+    vector <Admin*> admins;
+    vector <Customer*> customers;
+    vector <Vehicle*> vehicles;
+
+    FileHandler filing;
+    filing.loadAdminData(admins, "admins.csv");
+    filing.loadCustomerData(customers, "customers.csv");
+    filing.loadVehiclesData(vehicles, "vehicles.csv");
+    filing.loadBookingsData(customers, "bookings.csv");
 
     string options[3] = {"Admin", "Customer", "Exit Program"};
 
@@ -75,7 +86,13 @@ int main()
         printLineWithDashes();
 
         printLineWithDashes();
-        for(int i = 0; i < 3; i++)
+
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
+        }
+
+        for (int i = 0; i < 3; i++)
         {
             if(i == choice)
             {
@@ -86,8 +103,20 @@ int main()
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, true);
             }
         }
-        printLineWithSpaces();
+
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
+        }
+
         printFormattedText("Navigate with W/S or Arrow Keys", COLOR_WHITE, false);
+        printLineWithDashes();
+
+        printLineWithDashes();
+        printFormattedText("Developed By:", COLOR_MAGENTA, true);
+        printFormattedText("Rayyan Aamir (24K-0687)", COLOR_WHITE, true);
+        printFormattedText("Usaid Khan (24K-0832)", COLOR_WHITE, true);
+        printFormattedText("Hammad Haider (24K-0634)", COLOR_WHITE, true);
         printLineWithDashes();
 
         maskCursor();
@@ -121,6 +150,10 @@ int main()
     
     std :: cout << COLOR_GREEN << "Exiting the program..." << COLOR_RESET;
 
+    filing.writeAdminData(admins, "admins.csv");
+    filing.writeCustomerData(customers, "customers.csv");
+    filing.writeVehiclesData(vehicles, "vehicles.csv");
+    filing.writeBookingsData(customers, "bookings.csv");
 
     for (Vehicle* v : vehicles)
         delete v;
@@ -131,8 +164,8 @@ int main()
     for (Admin* a : admins)
         delete a;
 
-    for (Booking* b : totalBookings)
-        delete b;
+    // for (Booking* b : totalBookings)
+    //     delete b;
     
     return 0;
 }
@@ -154,7 +187,13 @@ void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vec
         printLineWithDashes();
 
         printLineWithDashes();
-        for(int i = 0; i < 3; i++)
+
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
+        }
+
+        for (int i = 0; i < 3; i++)
         {
             if(i == choice)
             {
@@ -165,6 +204,18 @@ void registerOrLogin(vector <Admin*> &admins, vector <Customer*> &customers, vec
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, true);
             }
         }
+
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
+        }
+        printLineWithDashes();
+
+        printLineWithDashes();
+        printFormattedText("Developed By:", COLOR_MAGENTA, true);
+        printFormattedText("Rayyan Aamir (24K-0687)", COLOR_WHITE, true);
+        printFormattedText("Usaid Khan (24K-0832)", COLOR_WHITE, true);
+        printFormattedText("Hammad Haider (24K-0634)", COLOR_WHITE, true);
         printLineWithDashes();
 
         pressedKey = _getch();
@@ -202,16 +253,16 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
     string enteredEmail, enteredPass;
     vector <User*> users;
 
-    if(userType == "Admin")
+    if (userType == "Admin")
     {
-        for(int i = 0; i < admins.size(); i++)
+        for (int i = 0; i < admins.size(); i++)
         {
             users.push_back(admins[i]);
         }
     }
     else
     {
-        for(int i = 0; i < customers.size(); i++)
+        for (int i = 0; i < customers.size(); i++)
         {
             users.push_back(customers[i]);
         }
@@ -235,9 +286,9 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
         enteredPass = maskedPassword();
         cout << endl;
 
-        for(int i = 0; i < users.size(); i++)
+        for (int i = 0; i < users.size(); i++)
         {
-            if(users[i]->verifyLogin(enteredEmail, enteredPass))
+            if (users[i]->verifyLogin(enteredEmail, enteredPass))
             {
                 flag = true;
                 printLineWithDashes();
@@ -249,7 +300,7 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
             }
         }
 
-        if(!flag)
+        if (!flag)
         {
             printLineWithDashes();
             printFormattedText("Wrong Email or Password! Try again", COLOR_RED, true);
@@ -269,7 +320,7 @@ void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const 
     printLineWithDashes();
 
     printLineWithDashes();
-    if(userType == "Admin")
+    if (userType == "Admin")
     {
         newUser = new Admin();
     }
@@ -279,7 +330,7 @@ void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const 
     }
 
     newUser->registerUser();
-    if(userType == "Admin")
+    if (userType == "Admin")
     {
         admins.push_back(static_cast <Admin*> (newUser));
     }

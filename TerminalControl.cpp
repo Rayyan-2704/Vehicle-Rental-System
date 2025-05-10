@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include <sstream>
 #include <windows.h>
 #include <cstdlib>
 #include <conio.h>
@@ -63,4 +65,84 @@ void maskCursor()
     cursorInfo.dwSize = 100;                                // Set the cursor size to a maximum value (invisible cursor)
     cursorInfo.bVisible = FALSE;                            // Make the cursor invisible
     SetConsoleCursorInfo(consoleHandle, &cursorInfo);       // Apply the changes to the console
+}
+
+bool isEmailValid(const string &email)
+{
+    // Ensure that the email does not contain any spaces
+    if (email.find(' ') != string::npos)
+    {
+        return false;
+    }
+
+    size_t atPos = email.find('@');
+    size_t dotPos = email.find('.', atPos);
+
+    // Ensure that both '@' and '.' are present
+    if (atPos == string::npos || dotPos == string::npos)
+    {
+        return false;
+    }
+
+    // Ensure that '@' is not at the start, there is atleast one character between '@' and the following '.' and atleast 2 characters are present after the last occuring '.'
+    if (atPos == 0 || dotPos - atPos <= 1 || dotPos + 2 >= email.length())
+    {
+        return false;
+    }
+
+    // Ensure that '@' does not appear more than once
+    if (email.find('@', atPos + 1) != string::npos)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+string maskedPassword()
+{
+    string NewPassword = "";
+    char ch;
+
+    while ((ch = _getch()) != '\r')
+    {
+        if (ch == '\b')
+        {
+            if (!NewPassword.empty())
+            {
+                cout << "\b \b";
+                NewPassword.pop_back();
+            }
+        }
+        else
+        {
+            cout << '*';
+            NewPassword += ch;
+        }
+    }
+    return NewPassword;
+}
+
+string lowercaseString(const string& input) 
+{
+    string result;
+    for (char ch : input) 
+    {
+        if (isalpha(ch)) 
+        {
+            result += tolower(ch);
+        } 
+        else 
+        {
+            result += ch;
+        }
+    }
+    return result;
+}
+
+string toTwoDecimalString(double value) 
+{
+    stringstream ss;
+    ss << fixed << setprecision(2) << value;
+    return ss.str();
 }

@@ -24,7 +24,9 @@ public:
     Customer();
     Customer(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
 
+    static void setCustomerIDCounter(int count);
     static int getCustomersCount();
+    const vector<Booking>& getBookings() const;
     void generateUserID() override;
     void incrementOrDecrementIDCounter(bool isIncrement) override;
     void addBooking(Booking &b);

@@ -37,13 +37,14 @@ public:
     virtual void registerUser();
     virtual void updateUserProfile(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
     bool verifyLogin(const string &e, const string &p);
-    virtual void generateUserID();
+    virtual void generateUserID() = 0;
     virtual void displayUserInfo() const;
     virtual void incrementOrDecrementIDCounter(bool isIncrement) = 0;
     virtual void editDetails() = 0;
     virtual void userConsole(vector <Vehicle*> &inventory) = 0;
 
     /* Setters (Mutators) */
+    void setUserID(const string &id);
     void setUserName(const string &name);
     void setUserEmail(const string &email);
     void setUserPassword(const string &password);
@@ -55,6 +56,7 @@ public:
     string getUserID() const;
     string getUserName() const;
     string getUserEmail() const;
+    string getUserPassword() const;
     string getUserPhoneNumber() const;
     string getUserAddress() const;
     string getUserType() const;
@@ -63,14 +65,5 @@ public:
     /* Destructor */
     virtual ~User();
 };
-
-/* Verification of Email: Global function */
-bool isEmailValid(const string &email);
-
-/* Ensuring that when password is entered onto the console, it is masked by asterisks '*' */
-string maskedPassword();
-
-/* Converting the string to lowercase */
-string lowercaseString(const string& input);
 
 #endif

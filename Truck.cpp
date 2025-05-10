@@ -24,9 +24,15 @@ Truck::Truck(const string &b, const string &m, const string &l, double rate, boo
     generateVehicleID();
 }
 
+void Truck::setTruckIDCounter(int count) { truckIDCounter = count; }
 void Truck::setLoadCapacity(double lC) { loadCapacity = lC; }
 double Truck::getLoadCapacity() const { return loadCapacity; }
 int Truck::getTrucksCount() { return trucksCount; }
+string Truck::getAdditionalData() const
+{
+    string s = toTwoDecimalString(loadCapacity);
+    return s;
+}
 
 void Truck::generateVehicleID()
 {
@@ -48,8 +54,8 @@ void Truck::displayVehicleDetails(ostream &os) const
     // os << "Load Capacity: " << loadCapacity << " kg" << endl;
     printFormattedText("Vehicle ID: " + vehicleID, COLOR_WHITE, false);
     printFormattedText("Brand: " + brand + " | Model: " + model + " | Type: " + vehicleType, COLOR_WHITE, false);
-    printFormattedText("Rate: $" + to_string(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
-    printFormattedText("Load Capacity: " + to_string(loadCapacity) + " kg" , COLOR_WHITE, false);
+    printFormattedText("Rate: $" + toTwoDecimalString(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
+    printFormattedText("Load Capacity: " + toTwoDecimalString(loadCapacity) + " kg" , COLOR_WHITE, false);
     printLineWithSpaces();
 }
 

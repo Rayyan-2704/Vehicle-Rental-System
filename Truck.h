@@ -23,9 +23,11 @@ public:
     Truck();
     Truck(const string &b, const string &m, const string &l, double rate, bool available, double lC);
 
+    static void setTruckIDCounter(int count);
     void setLoadCapacity(double lC);
     double getLoadCapacity() const;
     static int getTrucksCount();
+    string getAdditionalData() const override;
 
     void generateVehicleID() override;
     void incrementOrDecrementIDCounter(bool isIncrement) override;

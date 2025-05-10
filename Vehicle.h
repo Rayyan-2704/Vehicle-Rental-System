@@ -30,12 +30,13 @@ public:
     Vehicle(const string &b, const string &m, const string &l, double rate, bool available, const string vT);
 
     /* Vehicle Utility Methods */
-    virtual void generateVehicleID();
+    virtual void generateVehicleID() = 0;
     virtual void incrementOrDecrementIDCounter(bool isIncrement) = 0;
     virtual void displayVehicleDetails(ostream &os) const = 0;
     virtual void addVehicle() = 0;
 
     /* Setters (Mutators) */
+    void setVehicleID(const string &id);
     void setBrand(const string &b);
     void setModel(const string &m);
     void setLicensePlate(const string &l);
@@ -44,6 +45,7 @@ public:
     void setVehicleType(const string &type);
 
     /* Getters (Accessors) */
+    virtual string getAdditionalData() const = 0;
     string getVehicleID() const;
     string getBrand() const;
     string getModel() const;

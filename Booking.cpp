@@ -21,6 +21,7 @@ Booking::Booking() : bookedVehicleID(""), bookedCustomerID(""), rentDuration(0),
 
 Booking::Booking(const string &vID, const string &cID, int days, double rentPerDay) : bookedVehicleID(vID), bookedCustomerID(cID), rentDuration(days)
 {
+    // rentPerDay is a default argument for filing purposes
     bookingsCount++;
     bookingIDCounter++;
     generateBookingID();
@@ -45,12 +46,14 @@ void Booking::displayBookingDetails() const
     // cout << "Booking ID: " << bookingID << " | Booked Vehicle ID: " << bookedVehicleID << " | Booked Customer ID: " << bookedCustomerID << endl;
     // cout << "Rent Date: " << rentDate << " | Rent Duration: " << rentDuration <<  " days" << " | Total Rental Cost: $"  << rentalCost << endl;
     printFormattedText("Booking ID: " + bookingID + " | Booked Vehicle ID: " + bookedVehicleID + " | Booked Customer ID: " + bookedCustomerID, COLOR_WHITE, false);
-    printFormattedText("Rent Date: " + rentDate + " | Rent Duration: " + to_string(rentDuration) +  " days" + " | Total Rental Cost: $"  + to_string(rentalCost), COLOR_WHITE, false);
+    printFormattedText("Rent Date: " + rentDate + " | Rent Duration: " + to_string(rentDuration) +  " days" + " | Total Rental Cost: $"  + toTwoDecimalString(rentalCost), COLOR_WHITE, false);
     printLineWithSpaces();
 }
 
+void Booking::setBookingID(const string &id) { bookingID = id; }
 void Booking::setBookedVehicleID(const string &vID) { bookedVehicleID = vID; }
 void Booking::setBookedCustomerID(const string &cID) { bookedCustomerID = cID; }
+void Booking::setRentDate(const string &date) { rentDate = date; }
 
 void Booking::setRentDateToToday()
 {
@@ -65,6 +68,7 @@ void Booking::setRentDateToToday()
 
 void Booking::setRentDuration(int days){ rentDuration = days; }
 void Booking::setRentalCost(double cost) { rentalCost = cost; }
+void Booking::setIDCounter(int count) { bookingIDCounter = count; }
 
 string Booking::getBookingID() const { return bookingID; }
 string Booking::getBookedVehicleID() const { return bookedVehicleID; }

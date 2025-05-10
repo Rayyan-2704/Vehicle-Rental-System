@@ -24,6 +24,8 @@ Admin::Admin(const string &name, const string &email, const string &pass, const 
     generateUserID();
 }
 
+void Admin::setAdminIDCounter(int count) { adminIDCounter = count; }
+
 int Admin::getAdminsCount() { return adminsCount; }
 
 void Admin::generateUserID()
@@ -369,6 +371,11 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
         printLineWithDashes();
 
         printLineWithDashes();
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
+        }
+
         // cout << "Menu Actions:" << endl;
         printFormattedText("Menu Actions:", COLOR_MAGENTA, true);
         for (int i = 0; i < 5; i++)
@@ -382,6 +389,11 @@ void Admin::userConsole(vector <Vehicle*> &inventory)
             {
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, true);
             }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
         }
         printLineWithDashes();
 

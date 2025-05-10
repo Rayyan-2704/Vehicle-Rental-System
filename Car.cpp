@@ -24,9 +24,11 @@ Car::Car(const string &b, const string &m, const string &l, double rate, bool av
     generateVehicleID();
 }
 
+void Car::setCarIDCounter(int count) { carIDCounter = count; }
 void Car::setFuelType(const string &f) { fuelType = f; }
 string Car::getFuelType() const { return fuelType; }
 int Car::getCarsCount() { return carsCount; }
+string Car::getAdditionalData() const { return fuelType; }
 
 void Car::generateVehicleID()
 {
@@ -48,7 +50,7 @@ void Car::displayVehicleDetails(ostream &os) const
     // os << "Fuel Type: " << fuelType << endl;
     printFormattedText("Vehicle ID: " + vehicleID, COLOR_WHITE, false);
     printFormattedText("Brand: " + brand + " | Model: " + model + " | Type: " + vehicleType, COLOR_WHITE, false);
-    printFormattedText("Rate: $" + to_string(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
+    printFormattedText("Rate: $" + toTwoDecimalString(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
     printFormattedText("Fuel Type: " + fuelType, COLOR_WHITE, false);
     printLineWithSpaces();
 }

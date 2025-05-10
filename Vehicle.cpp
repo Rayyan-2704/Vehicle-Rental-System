@@ -13,23 +13,15 @@ using namespace std;
 Vehicle::Vehicle() : brand(""), model(""), licensePlate(""), ratePerDay(0.0), isAvailable(false)
 {
     vehiclesCount++;
-    generateVehicleID();
 }
 
 Vehicle::Vehicle(const string &b, const string &m, const string &l, double rate, bool available, const string vT) : brand(b), model(m), licensePlate(l), ratePerDay(rate), isAvailable(available), vehicleType(vT)
 {
     vehiclesCount++;
-    generateVehicleID();
-}
-
-void Vehicle::generateVehicleID() 
-{
-    stringstream ss;
-    ss << "V-" << setw(4) << setfill('0') << vehiclesCount;
-    vehicleID = ss.str();
 }
 
 /* Setters */
+void Vehicle::setVehicleID(const string &id) { vehicleID = id; }
 void Vehicle::setBrand(const string &b) { brand = b; }
 void Vehicle::setModel(const string &m) { model = m; }
 void Vehicle::setLicensePlate(const string &l) { licensePlate = l; }

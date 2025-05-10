@@ -36,4 +36,16 @@ int getScreenWidth();
 /* Hides the cursor on the terminal */
 void maskCursor();
 
+/* Verification of Email: Global function */
+bool isEmailValid(const string &email);
+
+/* Ensuring that when password is entered onto the console, it is masked by asterisks '*' */
+string maskedPassword();
+
+/* Converting the string to lowercase */
+string lowercaseString(const string& input);
+
+/* To convert non-string values to a 2-decimal places string */
+string toTwoDecimalString(double value);
+
 #endif

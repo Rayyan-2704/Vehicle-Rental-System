@@ -24,7 +24,11 @@ Customer::Customer(const string &name, const string &email, const string &pass, 
     generateUserID();
 }
 
+void Customer::setCustomerIDCounter(int count) { customerIDCounter = count; }
+
 int Customer::getCustomersCount() { return customersCount; }
+
+const vector<Booking>& Customer::getBookings() const { return bookings; }
 
 void Customer::generateUserID()
 {
@@ -370,7 +374,7 @@ void Customer::returnVehicle(vector <Vehicle*> &inventory)
         // cout << "Your total rental cost amounts to $" << payment << endl;
         printLineWithDashes();
         printFormattedText("Vehicle (" + id + ") has been returned successfully!", COLOR_GREEN, true);
-        printFormattedText("Your total rental cost amounts to $" + to_string(payment), COLOR_WHITE, true);
+        printFormattedText("Your total rental cost amounts to $" + toTwoDecimalString(payment), COLOR_WHITE, true);
     }
     else
     {
@@ -436,6 +440,11 @@ void Customer::userConsole(vector <Vehicle*> &inventory)
         printLineWithDashes();
 
         printLineWithDashes();
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
+        }
+
         // cout << "Menu Actions:" << endl;
         printFormattedText("Menu Actions:", COLOR_MAGENTA, true);
         for (int i = 0; i < 5; i++)
@@ -449,6 +458,11 @@ void Customer::userConsole(vector <Vehicle*> &inventory)
             {
                 printFormattedText(to_string(i + 1) + ". " + options[i], COLOR_WHITE, true);
             }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            printLineWithSpaces();
         }
         printLineWithDashes();
 

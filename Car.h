@@ -23,9 +23,11 @@ public:
     Car();
     Car(const string &b, const string &m, const string &l, double rate, bool available, const string &f);
 
+    static void setCarIDCounter(int count);
     void setFuelType(const string &f);
     string getFuelType() const;
     static int getCarsCount();
+    string getAdditionalData() const override;
     
     void generateVehicleID() override;
     void incrementOrDecrementIDCounter(bool isIncrement) override;

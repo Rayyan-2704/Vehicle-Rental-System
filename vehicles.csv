@@ -1,0 +1,13 @@
+Vehicle ID,Brand,Model,License,Vehicle Type,Rate Per Day,Available,Additional Data
+VC-0001,Toyota,Corolla,ABC-123,Car,50.00,Yes,Petrol
+VC-0002,Honda,Civic,DEF-456,Car,55.00,Yes,Petrol
+VC-0003,Tesla,Model 3,GHI-789,Car,75.00,Yes,Electric
+VC-0004,Ford,Mustang,BCD-777,Car,85.00,No,Petrol
+VB-0001,Yamaha,R15,JKL-111,Bike,20.00,Yes,150
+VB-0002,Honda,CBR500R,MNO-222,Bike,25.00,Yes,500
+VB-0003,Suzuki,GSX-R600,PQR-333,Bike,30.00,No,600
+VB-0004,Kawasaki,Ninja 300,EFG-888,Bike,28.00,No,300
+VT-0001,Volvo,FH16,STU-444,Truck,120.00,Yes,20000.00
+VT-0002,Scania,R500,VWX-555,Truck,110.00,Yes,18000.00
+VT-0003,MAN,TGX,YZA-666,Truck,130.00,Yes,22000.00
+VT-0004,Mercedes,Actros,HIJ-999,Truck,125.00,No,25000.00

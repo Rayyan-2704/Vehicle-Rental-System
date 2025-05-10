@@ -13,13 +13,11 @@ using namespace std;
 User::User() : userName(""), userEmail(""), userPassword(""), userPhoneNumber(""), userAddress("")
 {
     usersCount++;
-    generateUserID();
 }
 
 User::User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address, const string &type) : userName(name), userEmail(email), userPassword(pass), userPhoneNumber(phoneNum), userAddress(address), userType(type)
 {
     usersCount++;
-    generateUserID();
 }
 
 void User::registerUser()
@@ -96,13 +94,6 @@ bool User::verifyLogin(const string &e, const string &p)
     return (userEmail == e && userPassword == p);
 }
 
-void User::generateUserID()
-{
-    stringstream ss;
-    ss << "U-" << setw(4) << setfill('0') << usersCount; // building the string stream
-    userID = ss.str(); // extracting full string from the stream and assigning it to userID
-}
-
 void User::displayUserInfo() const
 {
     cout << "User ID: " << userID << endl;
@@ -113,6 +104,7 @@ void User::displayUserInfo() const
 }
 
 /* Setters */
+void User::setUserID(const string &id) { userID = id; }
 void User::setUserName(const string &name) { userName = name; }
 void User::setUserEmail(const string &email) { userEmail = email; }
 void User::setUserPassword(const string &password) { userPassword = password; }
@@ -124,6 +116,7 @@ void User::setUserType(const string &type) { userType = type; }
 string User::getUserID() const { return userID; }
 string User::getUserName() const { return userName; }
 string User::getUserEmail() const { return userEmail; }
+string User::getUserPassword() const { return userPassword; }
 string User::getUserPhoneNumber() const { return userPhoneNumber; }
 string User::getUserAddress() const { return userAddress; }
 string User::getUserType() const { return userType; }
@@ -132,75 +125,3 @@ int User::getUsersCount() { return usersCount; }
 User::~User() { usersCount--; }
 
 int User::usersCount = 0;
-
-bool isEmailValid(const string &email)
-{
-    // Ensure that the email does not contain any spaces
-    if (email.find(' ') != string::npos)
-    {
-        return false;
-    }
-
-    size_t atPos = email.find('@');
-    size_t dotPos = email.find('.', atPos);
-
-    // Ensure that both '@' and '.' are present
-    if (atPos == string::npos || dotPos == string::npos)
-    {
-        return false;
-    }
-
-    // Ensure that '@' is not at the start, there is atleast one character between '@' and the following '.' and atleast 2 characters are present after the last occuring '.'
-    if (atPos == 0 || dotPos - atPos <= 1 || dotPos + 2 >= email.length())
-    {
-        return false;
-    }
-
-    // Ensure that '@' does not appear more than once
-    if (email.find('@', atPos + 1) != string::npos)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-string maskedPassword()
-{
-    string NewPassword = "";
-    char ch;
-
-    while ((ch = _getch()) != '\r')
-    {
-        if (ch == '\b')
-        {
-            if (!NewPassword.empty())
-            {
-                cout << "\b \b";
-                NewPassword.pop_back();
-            }
-        }
-        else
-        {
-            cout << '*';
-            NewPassword += ch;
-        }
-    }
-    return NewPassword;
-}
-
-string lowercaseString(const string& input) {
-    string result;
-    for (char ch : input) 
-    {
-        if (isalpha(ch)) 
-        {
-            result += tolower(ch);
-        } 
-        else 
-        {
-            result += ch;
-        }
-    }
-    return result;
-}

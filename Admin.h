@@ -22,6 +22,7 @@ public:
     Admin();
     Admin(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
 
+    static void setAdminIDCounter(int count);
     static int getAdminsCount();
     void generateUserID() override;
     void incrementOrDecrementIDCounter(bool isIncrement) override;

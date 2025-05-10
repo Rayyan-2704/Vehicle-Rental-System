@@ -24,9 +24,15 @@ Bike::Bike(const string &b, const string &m, const string &l, double rate, bool 
     generateVehicleID();
 }
 
+void Bike::setBikeIDCounter(int count) { bikeIDCounter = count; }
 void Bike::setEngineCC(int cc) { engineCC = cc; }
 int Bike::getEngineCC() const { return engineCC; }
 int Bike::getBikesCount() { return bikesCount; }
+string Bike::getAdditionalData() const
+{
+    string s = to_string(engineCC);
+    return s;
+}
 
 void Bike::generateVehicleID()
 {
@@ -48,7 +54,7 @@ void Bike::displayVehicleDetails(ostream &os) const
     // os << "Engine CC: " << engineCC <<  " CC" << endl;
     printFormattedText("Vehicle ID: " + vehicleID, COLOR_WHITE, false);
     printFormattedText("Brand: " + brand + " | Model: " + model + " | Type: " + vehicleType, COLOR_WHITE, false);
-    printFormattedText("Rate: $" + to_string(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
+    printFormattedText("Rate: $" + toTwoDecimalString(ratePerDay) + " | License Plate: " + licensePlate + " | Available: " + ((isAvailable) ? "Yes" : "No"), COLOR_WHITE, false);
     printFormattedText("Engine CC: " + to_string(engineCC) + " CC", COLOR_WHITE, false);
     printLineWithSpaces();
 }

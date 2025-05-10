@@ -28,7 +28,7 @@ class Booking
 public:
     /* Constructors */
     Booking();
-    Booking(const string &vID, const string &cID, int days, double rentPerDay);
+    Booking(const string &vID, const string &cID, int days, double rentPerDay = 0.0);
 
     /* Utility Methods */
     void generateBookingID();
@@ -36,11 +36,14 @@ public:
     void displayBookingDetails() const;
 
     /* Setters */
+    void setBookingID(const string &id);
     void setBookedVehicleID(const string &vID);
     void setBookedCustomerID(const string &cID);
+    void setRentDate(const string &date);
     void setRentDateToToday();
     void setRentDuration(int days);
     void setRentalCost(double cost);
+    static void setIDCounter(int count);
 
     /* Getters */
     string getBookingID() const;
