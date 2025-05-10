@@ -6,7 +6,7 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 
 ---
 
-## 📌 Features
+## 📌 Key Features
 
 * 🚘 **View available vehicles** by category (Car, Bike, Truck)
 * 📆 **Customers can rent vehicles** for a specific number of days
@@ -85,7 +85,7 @@ g++ main.cpp TerminalControl.cpp FileHandler.cpp Vehicle.cpp Car.cpp Bike.cpp Tr
 
 ---
 
-## 👥 Team Members
+## 👥 Group Members
 
 - [Rayyan Aamir [24K-0687]](https://github.com/Rayyan-2704)
 - [Usaid Khan [24K-0832]](https://github.com/MuhammadUsaidKhan)
