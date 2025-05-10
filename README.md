@@ -24,6 +24,7 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 * ✅ **Encapsulation** (Private data with getters/setters)
 * ✅ **Inheritance** (`Car`, `Bike`, `Truck` inherit from `Vehicle` & `Admin`, `Customer` inherit from `User`)
 * ✅ **Polymorphism** (Virtual methods for runtime behavior)
+* ✅ **Association (Composition)** (Each `Customer` object has a `bookings` vector representing a strong ownership relationship)
 * ✅ **Class Templates** (Generic components if applicable)
 * ✅ **File Handling** (Persistent data via CSV files)
 * ✅ **Static Members** (Unique ID counters)
