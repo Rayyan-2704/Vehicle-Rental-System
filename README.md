@@ -9,36 +9,7 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 ## 📌 Features
 
 * 🚘 **View available vehicles** by category (Car, Bike, Truck)
-* 📆 **Rent vehicles** for a specific number of days
-* ❌ **Cancel bookings** (optional future enhancement)
-* 🧾 **Generate and view bookings** with unique IDs and cost
-* 📂 **CSV File Handling** for persistent storage
-* 🔐 **Separate Admin and Customer roles**
-* 🎨 **Terminal formatting** for better UI experience
-
----
-
-## 🧠 OOP Concepts Demonstrated
-
-* ✅ **Abstraction** (Simplified interaction through high-level interfaces)
-* ✅ **Encapsulation** (Private data with getters/setters)
-* ✅ **Inheritance** (`Car`, `Bike`, `Truck` inherit from `Vehicle`)
-* ✅ **Polymorphism** (Virtual methods for runtime behavior)
-* ✅ **Class Templates** (Generic components if applicable)
-* ✅ **File Handling** (Persistent data via CSV files)
-* ✅ **Static Members** (Unique ID counters)
-# 🚗 Vehicle Rental System – Terminal-Based Booking Application
-
-A C++ Object-Oriented Programming (OOP) project that simulates a **vehicle rental management system**.
-
-This console-based system allows **admins** to manage a fleet of vehicles and customers, while **customers** can rent vehicles like **cars, bikes, and trucks**.
-
----
-
-## 📌 Features
-
-* 🚘 **View available vehicles** by category (Car, Bike, Truck)
-* 📆 **Customers can rent vehicles** for a specific number of days
+* 📆 **Customers canent vehicles** for a specific number of days
 * 🛠️ **Admins can add and remove vehicles** from the inventory
 * 🧾 **Generate and view bookings** with unique IDs and cost
 * 📂 **CSV File Handling** for persistent storage
