@@ -1,4 +1,4 @@
-# 🚗 Vehicle Rental System – Terminal-Based Booking Application
+# 🚗 Vehicle Rental System
 
 A C++ Object-Oriented Programming (OOP) project that simulates a **vehicle rental management system**.
 
