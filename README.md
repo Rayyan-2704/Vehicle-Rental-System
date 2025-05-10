@@ -9,7 +9,7 @@ This console-based system allows **admins** to manage a fleet of vehicles, while
 ## 📌 Features
 
 * 🚘 **View available vehicles** by category (Car, Bike, Truck)
-* 📆 **Customers canent vehicles** for a specific number of days
+* 📆 **Customers can rent vehicles** for a specific number of days
 * 🛠️ **Admins can add and remove vehicles** from the inventory
 * 🧾 **Generate and view bookings** with unique IDs and cost
 * 📂 **CSV File Handling** for persistent storage
