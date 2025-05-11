@@ -237,6 +237,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
 {
     string id;
     bool flag = false;
+    bool alreadyRented = true;
     char confirmation;
     int i;
 
@@ -250,7 +251,7 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
     for (i = 0; i < inventory.size(); i++)
     {
         // cout << "Vehicle " << (i + 1) << ": " << inventory[i]->getVehicleID() << " | Vehicle Type: " << inventory[i]->getVehicleType() << endl;
-        printFormattedText("Vehicle " + to_string(i + 1) + ": " + inventory[i]->getVehicleID() + " | Vehicle Type: " + inventory[i]->getVehicleType() , COLOR_WHITE, false);
+        printFormattedText("Vehicle " + to_string(i + 1) + ": " + inventory[i]->getVehicleID() + " | Vehicle Type: " + inventory[i]->getVehicleType() + " | Available: " + ((inventory[i]->getAvailability()) ? "Yes" : "No") , COLOR_WHITE, false);
     }
 
     printLineWithSpaces();
@@ -261,9 +262,14 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
 
     for (i = 0; i < inventory.size(); i++)
     {
-        if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID())) 
+        if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID()) && inventory[i]->getAvailability()) 
         {
+            alreadyRented = false;
             flag = true;
+            break;
+        }
+        else if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID()) && !inventory[i]->getAvailability())
+        {
             break;
         }
     }
@@ -271,15 +277,28 @@ void Admin::removeVehicleFromInventory(vector <Vehicle*> &inventory)
     while (!flag)
     {
         // cout << endl << "Invalid vehicle ID!" << endl << "Enter the valid vehicle ID of the vehicle to be removed from the inventory: ";
-        printFormattedText("Invalid vehicle ID! Enter the valid vehicle ID of the vehicle to be removed from the inventory: ", COLOR_WHITE, false);
+        if (i == inventory.size())
+        {
+            printFormattedText("Invalid vehicle ID! Enter the valid vehicle ID of the vehicle to be removed from the inventory: ", COLOR_WHITE, false);
+        }
+        else if (alreadyRented)
+        {
+            printFormattedText("The selected vehicle cannot be removed as it has already been rented! Enter again: ", COLOR_WHITE, false);
+        }
+        
         printInputPrompt();
         getline(cin, id);
 
         for (i = 0; i < inventory.size(); i++)
         {
-            if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID())) 
+            if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID()) && inventory[i]->getAvailability()) 
             {
+                alreadyRented = false;
                 flag = true;
+                break;
+            }
+            else if (lowercaseString(id) == lowercaseString(inventory[i]->getVehicleID()) && !inventory[i]->getAvailability())
+            {
                 break;
             }
         }

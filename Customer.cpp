@@ -214,14 +214,26 @@ void Customer::rentVehicle(vector <Vehicle*> &inventory)
         }
     } while (!optionChosen);
 
-    printLineWithSpaces();
     // cout << "Displaying all available " << vehicleTypeChosen << "s to rent from" << endl;
-    printFormattedText("Displaying all available " + vehicleTypeChosen + "s to rent from", COLOR_WHITE, false);
+    printFormattedText("Displaying all available " + vehicleTypeChosen + "s to rent from", COLOR_MAGENTA, true);
+    printLineWithSpaces();
+
+    bool anyAvailable = false;
     for (i = 0; i < inventory.size(); i++)
     {
-        if(inventory[i]->getVehicleType() == vehicleTypeChosen && inventory[i]->getAvailability()){
+        if (inventory[i]->getVehicleType() == vehicleTypeChosen && inventory[i]->getAvailability())
+        {
             cout << *inventory[i];
+            anyAvailable = true;
         }
+    }
+
+    if (!anyAvailable)
+    {
+        printFormattedText("No available " + vehicleTypeChosen + "s at the moment.", COLOR_RED, true);
+        printLineWithDashes();
+        system("pause");
+        return; // Exit early if no vehicle available
     }
 
     printLineWithSpaces();
