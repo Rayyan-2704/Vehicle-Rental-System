@@ -98,26 +98,26 @@ bool isEmailValid(const string &email)
 
 string maskedPassword()
 {
-    string NewPassword = "";
+    string passwordMasked = "";
     char ch;
 
     while ((ch = _getch()) != '\r')
     {
         if (ch == '\b')
         {
-            if (!NewPassword.empty())
+            if (!passwordMasked.empty())
             {
                 cout << "\b \b";
-                NewPassword.pop_back();
+                passwordMasked.pop_back();
             }
         }
         else
         {
             cout << '*';
-            NewPassword += ch;
+            passwordMasked += ch;
         }
     }
-    return NewPassword;
+    return passwordMasked;
 }
 
 string lowercaseString(const string& input) 
