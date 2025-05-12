@@ -20,7 +20,7 @@ User::User(const string &name, const string &email, const string &pass, const st
     usersCount++;
 }
 
-void User::registerUser()
+void User::registerUser(vector <User*> &users)
 {
     // cout << "Enter Full Name: ";
     // getline(cin, userName);
@@ -38,41 +38,67 @@ void User::registerUser()
     getline(cin, userName);
 
     printLineWithSpaces();
+    bool flag;
     do
     {
+        flag = false;
         printFormattedText("Enter the email of the user:", COLOR_WHITE, false);
         printInputPrompt();
         getline(cin, userEmail);
-        if(!isEmailValid(userEmail))
+        if (!isEmailValid(userEmail))
         {
-            printFormattedText("Invalid email! Try again.", COLOR_WHITE, false);
+            printFormattedText("Error: Invalid email! Try again.", COLOR_RED, false);
         }
-    } while (!isEmailValid(userEmail));
+
+        for (User *u : users)
+        {
+            if (u->getUserEmail() == userEmail)
+            {
+                printFormattedText("Error: The email address you entered is already associated with an existing account. Please use a different email.", COLOR_RED, false);
+                flag = true;
+                break;
+            }
+        }
+    } while (!isEmailValid(userEmail) || flag);
     
     string repeatedPassword;
     printLineWithSpaces();
     do
     {
-        printFormattedText("Enter the password of the user:", COLOR_WHITE, false);
-        printInputPrompt();
-        userPassword = maskedPassword();
-        cout << endl;
+        do
+        {
+            printFormattedText("Enter the password of the user:", COLOR_WHITE, false);
+            printInputPrompt();
+            userPassword = maskedPassword();
+            cout << endl;
+            
+            if (!isValidPassword(userPassword))
+            {
+                printFormattedText("Error: Password must be of atleast 7 characters.", COLOR_RED, false);
+            }
+        } while (!isValidPassword(userPassword));
 
         printFormattedText("Enter password again for confirmation:", COLOR_WHITE, false);
         printInputPrompt();
         repeatedPassword = maskedPassword();
         cout << endl;
 
-        if(repeatedPassword != userPassword)
+        if (repeatedPassword != userPassword)
         {
-            printFormattedText("Passwords do not match. Try again!", COLOR_WHITE, false);
+            printFormattedText("Error: Passwords do not match. Try again!", COLOR_RED, false);
         }
     } while (repeatedPassword != userPassword);
 
     printLineWithSpaces();
-    printFormattedText("Enter the phone number of the user:", COLOR_WHITE, false);
-    printInputPrompt();
-    getline(cin, userPhoneNumber);
+    do {
+        printFormattedText("Enter the phone number of the user:", COLOR_WHITE, false);
+        printInputPrompt();
+        getline(cin, userPhoneNumber);
+
+        if (!isValidPhoneNumber(userPhoneNumber)) {
+            printFormattedText("Error: Phone number must start with '03', be 12 characters long, and contain a '-' at the 5th position (e.g., 03XX-XXXXXXX).", COLOR_RED, false);
+        }
+    } while (!isValidPhoneNumber(userPhoneNumber));
 
     printLineWithSpaces();
     printFormattedText("Enter the address of the user:", COLOR_WHITE, false);

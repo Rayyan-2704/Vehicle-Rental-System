@@ -202,7 +202,7 @@ void Admin::addVehicleToInventory(vector <Vehicle*> &inventory)
         }
     } while (!optionChosen);
 
-    newVehicle->addVehicle();
+    newVehicle->addVehicle(inventory);
 
     printLineWithSpaces();
     // cout << endl << "Please confirm to add the new vehicle to the inventory. (Y/N): ";

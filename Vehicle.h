@@ -33,7 +33,7 @@ public:
     virtual void generateVehicleID() = 0;
     virtual void incrementOrDecrementIDCounter(bool isIncrement) = 0;
     virtual void displayVehicleDetails(ostream &os) const = 0;
-    virtual void addVehicle() = 0;
+    virtual void addVehicle(vector <Vehicle*> &inventory) = 0;
 
     /* Setters (Mutators) */
     void setVehicleID(const string &id);

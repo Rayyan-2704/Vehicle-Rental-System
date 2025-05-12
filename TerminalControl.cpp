@@ -96,6 +96,62 @@ bool isEmailValid(const string &email)
     return true;
 }
 
+bool isValidPhoneNumber(const string &phoneNum)
+{
+    if (phoneNum.length() != 12 || phoneNum[4] != '-' || phoneNum.substr(0, 2) != "03")
+    {
+        return false;
+    }
+
+    for (int i = 0; i < phoneNum.length(); ++i)
+    {
+        if (i == 4) continue; // Skip the dash '-'
+        if (!isdigit(phoneNum[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool isValidPassword(const string &password)
+{
+    if (password.length() >= 7)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool isValidLicensePlate(const string &plate)
+{
+    if (plate.length() != 7)
+        return false;
+
+    for (int i = 0; i < 7; ++i)
+    {
+        if (i < 3)
+        {
+            if (!isalpha(plate[i]))
+                return false;
+        }
+        else if (i == 3)
+        {
+            if (plate[i] != '-')
+                return false;
+        }
+        else
+        {
+            if (!isdigit(plate[i]))
+                return false;
+        }
+    }
+
+    return true;
+}
+
 string maskedPassword()
 {
     string passwordMasked = "";

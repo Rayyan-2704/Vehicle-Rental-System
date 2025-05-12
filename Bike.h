@@ -32,7 +32,7 @@ public:
     void generateVehicleID() override;
     void incrementOrDecrementIDCounter(bool isIncrement) override;
     void displayVehicleDetails(ostream &os) const override;
-    void addVehicle() override;
+    void addVehicle(vector <Vehicle*> &inventory) override;
 
     ~Bike();
 };

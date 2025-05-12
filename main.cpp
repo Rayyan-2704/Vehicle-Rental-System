@@ -313,6 +313,22 @@ void loginUser(vector <Admin*> &admins, vector <Customer*> &customers, vector <V
 void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const string &userType)
 {
     User *newUser;
+    vector <User*> users;
+
+    if (userType == "Admin")
+    {
+        for (int i = 0; i < admins.size(); i++)
+        {
+            users.push_back(admins[i]);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < customers.size(); i++)
+        {
+            users.push_back(customers[i]);
+        }
+    }
     
     system("cls");
     printLineWithDashes();
@@ -329,7 +345,7 @@ void registerUser(vector <Admin*> &admins, vector <Customer*> &customers, const 
         newUser = new Customer();
     }
 
-    newUser->registerUser();
+    newUser->registerUser(users);
     if (userType == "Admin")
     {
         admins.push_back(static_cast <Admin*> (newUser));

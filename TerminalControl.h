@@ -39,6 +39,15 @@ void maskCursor();
 /* Verification of Email: Global function */
 bool isEmailValid(const string &email);
 
+/* Verification of Phone Number */
+bool isValidPhoneNumber(const string &phoneNum);
+
+/* Verification of Password */
+bool isValidPassword(const string &password);
+
+/* Verification of License Plate */
+bool isValidLicensePlate(const string &plate);
+
 /* Ensuring that when password is entered onto the console, it is masked by asterisks '*' */
 string maskedPassword();
 

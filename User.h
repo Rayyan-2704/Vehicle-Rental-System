@@ -34,7 +34,7 @@ public:
     User(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address, const string &type);
 
     /* User Registration, Profile Management and Utility Methods */
-    virtual void registerUser();
+    virtual void registerUser(vector <User*> &users);
     virtual void updateUserProfile(const string &name, const string &email, const string &pass, const string &phoneNum, const string &address);
     bool verifyLogin(const string &e, const string &p);
     virtual void generateUserID() = 0;

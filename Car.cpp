@@ -55,7 +55,7 @@ void Car::displayVehicleDetails(ostream &os) const
     printLineWithSpaces();
 }
 
-void Car::addVehicle()
+void Car::addVehicle(vector <Vehicle*> &inventory)
 {
     // cout << endl << "Enter the details of the new CAR below" << endl;
     printFormattedText("Enter the details of the new CAR below", COLOR_WHITE, false);
@@ -69,10 +69,33 @@ void Car::addVehicle()
     printInputPrompt();
     getline(cin, model);
 
-    // cout << "Enter the license plate of the new car: ";
-    printFormattedText("Enter the license plate of the new car:", COLOR_WHITE, false);
-    printInputPrompt();
-    getline(cin, licensePlate);
+    // // cout << "Enter the license plate of the new car: ";
+    // printFormattedText("Enter the license plate of the new car:", COLOR_WHITE, false);
+    // printInputPrompt();
+    // getline(cin, licensePlate);
+    bool flag;
+    do
+    {
+        flag = false;
+        printFormattedText("Enter the license plate of the new car:", COLOR_WHITE, false);
+        printInputPrompt();
+        getline(cin, licensePlate);
+
+        if (!isValidLicensePlate(licensePlate))
+        {
+            printFormattedText("Invalid license plate! It must be in the format 'XXX-123'. Try again.", COLOR_RED, false);
+        }
+        
+        for (Vehicle *v : inventory)
+        {
+            if (v->getLicensePlate() == licensePlate)
+            {
+                printFormattedText("Error: This license plate is already in use by another vehicle. Try a different one.", COLOR_RED, false);
+                flag = true;
+                break;
+            }
+        }
+    } while(!isValidLicensePlate(licensePlate) || flag);
 
     do
     {
