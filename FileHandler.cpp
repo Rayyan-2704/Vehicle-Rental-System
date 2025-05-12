@@ -24,6 +24,7 @@ void FileHandler::loadAdminData(vector <Admin*> &admins, const string &fileName)
     string line;
 
     /* Reading objects and storing it */
+    int initialIDCounter = 0;
     getline(inputFile, line); // Read Variables Header
     while (getline(inputFile, line))
     {
@@ -41,11 +42,15 @@ void FileHandler::loadAdminData(vector <Admin*> &admins, const string &fileName)
         a->setUserID(id);
 
         admins.push_back(a);
+
+        int count = atoi(a->getUserID().substr(3).c_str());
+        if (count > initialIDCounter)
+        {
+            initialIDCounter = count;
+        }
     }
 
     /* Setting the Admin ID Counter to an initial value to start from in the program */
-    Admin *a = admins.back();
-    int initialIDCounter = atoi(a->getUserID().substr(3).c_str());
     Admin::setAdminIDCounter(initialIDCounter);
 
     inputFile.close();
@@ -81,6 +86,7 @@ void FileHandler::loadCustomerData(vector <Customer*> &customers, const string &
     string line;
 
     /* Reading objects and storing it */
+    int initialIDCounter = 0;
     getline(inputFile, line); // Read Variables Header
     while (getline(inputFile, line))
     {
@@ -98,11 +104,15 @@ void FileHandler::loadCustomerData(vector <Customer*> &customers, const string &
         c->setUserID(id);
 
         customers.push_back(c);
+
+        int count = atoi(c->getUserID().substr(3).c_str());
+        if (count > initialIDCounter)
+        {
+            initialIDCounter = count;
+        }
     }
 
     /* Setting the Customer ID Counter to an initial value to start from in the program */
-    Customer *c = customers.back();
-    int initialIDCounter = atoi(c->getUserID().substr(3).c_str());
     Customer::setCustomerIDCounter(initialIDCounter);
 
     inputFile.close();
@@ -139,6 +149,7 @@ void FileHandler::loadVehiclesData(vector <Vehicle*> &inventory, const string &f
 
     /* Reading objects and storing it */
     Vehicle *v;
+    int initialCarIDCounter = 0, initialBikeIDCounter = 0, initialTruckIDCounter = 0;
     getline(inputFile, line); // Read Variables Header
     while (getline(inputFile, line))
     {
@@ -164,28 +175,42 @@ void FileHandler::loadVehiclesData(vector <Vehicle*> &inventory, const string &f
         if (type == "Car")
         {
             v = new Car(brand, model, license, rate, availability, additionalData);
-            int initialIDCounter = atoi(v->getVehicleID().substr(3).c_str());
-            Car::setCarIDCounter(initialIDCounter);
+            int count = atoi(v->getVehicleID().substr(3).c_str());
+            if (count > initialCarIDCounter)
+            {
+                initialCarIDCounter = count;
+            }
         }
         else if (type == "Bike")
         {
             int engineCC = atoi(additionalData.c_str());
             v = new Bike(brand, model, license, rate, availability, engineCC);
-            int initialIDCounter = atoi(v->getVehicleID().substr(3).c_str());
-            Bike::setBikeIDCounter(initialIDCounter);
+            int count = atoi(v->getVehicleID().substr(3).c_str());
+            if (count > initialBikeIDCounter)
+            {
+                initialBikeIDCounter = count;
+            }
         }
         else if (type == "Truck")
         {
             double loadCapacity = atof(additionalData.c_str());
             v = new Truck(brand, model, license, rate, availability, loadCapacity);
-            int initialIDCounter = atoi(v->getVehicleID().substr(3).c_str());
-            Truck::setTruckIDCounter(initialIDCounter);
+            int count = atoi(v->getVehicleID().substr(3).c_str());
+            if (count > initialTruckIDCounter)
+            {
+                initialTruckIDCounter = count;
+            }
         }
 
         v->setVehicleID(id);
 
         inventory.push_back(v);
     }
+
+    /* Setting the Car/Bike/Truck ID Counter to an initial value to start from in the program  */
+    Car::setCarIDCounter(initialCarIDCounter);
+    Bike::setBikeIDCounter(initialBikeIDCounter);
+    Truck::setTruckIDCounter(initialTruckIDCounter);
 
     inputFile.close();
 }
@@ -220,6 +245,7 @@ void FileHandler::loadBookingsData(vector <Customer*> &customers, const string &
     string line;
 
     /* Reading objects and storing it */
+    int initialIDCounter = 0;
     getline(inputFile, line); // Read Variables Header
     while (getline(inputFile, line))
     {
@@ -242,9 +268,11 @@ void FileHandler::loadBookingsData(vector <Customer*> &customers, const string &
         b->setRentDate(date);
         b->setRentalCost(cost);
 
-        /* Setting the Booking ID Counter to an initial value to start from in the program */
-        int initialIDCounter = atoi(bID.substr(3).c_str());
-        Booking::setIDCounter(initialIDCounter);
+        int count = atoi(bID.substr(3).c_str());
+        if (count > initialIDCounter)
+        {
+            initialIDCounter = count;
+        }
 
         for (Customer *c : customers)
         {
@@ -254,6 +282,9 @@ void FileHandler::loadBookingsData(vector <Customer*> &customers, const string &
             }
         }
     }
+
+    /* Setting the Booking ID Counter to an initial value to start from in the program */
+    Booking::setIDCounter(initialIDCounter);
 
     inputFile.close();
 }
